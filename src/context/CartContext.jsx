@@ -21,9 +21,8 @@ export const CartProvider = ({ children }) => {
   const fetchCart = async () => {
     setLoading(true);
     try {
-      const res = await API.get(`/cart`);
-      const userCart = res.data.filter((item) => item.userId === user.id);
-      setCartItems(userCart);
+      const res = await API.get(`/cart?userId=${Number(user.id)}`);
+      setCartItems(res.data);
     } catch (err) {
       console.error("Failed to fetch cart", err);
     } finally {
@@ -42,7 +41,7 @@ export const CartProvider = ({ children }) => {
       );
     } else {
       const newItem = {
-        userId: user.id,
+        userId: Number(user.id),
         productId: product.id,
         name: product.name,
         price: product.price,
@@ -85,9 +84,7 @@ export const CartProvider = ({ children }) => {
     (sum, item) => sum + item.price * item.quantity, 0
   );
 
-  const totalItems = cartItems.reduce(
-    (sum, item) => sum + item.quantity, 0
-  );
+  const totalItems = cartItems.length;
 
   return (
     <CartContext.Provider

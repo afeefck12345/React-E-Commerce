@@ -58,12 +58,19 @@ export default function OrdersPage() {
       </div>
     );
   }
+return (
+  <div className="min-h-screen bg-linear-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-950 dark:via-slate-900 dark:to-gray-900 px-4 py-10">
+    <div className="max-w-3xl mx-auto">
 
-  return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-800 p-6">
-      <h1 className="text-3xl font-bold mb-6 dark:text-white">📦 My Orders</h1>
+      
+      <div className="mb-8 text-center">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">My Orders</h1>
+        <p className="text-gray-400 dark:text-gray-500 text-sm mt-1">
+          {orders.length} {orders.length === 1 ? "order" : "orders"} placed
+        </p>
+      </div>
 
-      <div className="flex flex-col gap-4 max-w-3xl mx-auto">
+      <div className="flex flex-col gap-4">
         {orders.map((order) => {
           const isExpanded = expandedId === order.id;
           const date = new Date(order.date).toLocaleDateString("en-IN", {
@@ -74,11 +81,13 @@ export default function OrdersPage() {
           });
 
           return (
-            <div key={order.id} className="bg-white dark:bg-gray-700 rounded-2xl shadow-md overflow-hidden">
+            <div
+              key={order.id}
+              className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border border-gray-100 dark:border-gray-800 rounded-2xl overflow-hidden"
+            >
 
-              
               <div
-                className="flex items-center justify-between p-5 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-600 transition"
+                className="flex items-center justify-between p-5 cursor-pointer hover:bg-white/60 dark:hover:bg-gray-800/60 transition"
                 onClick={() => setExpandedId(isExpanded ? null : order.id)}
               >
                 <div className="flex flex-col gap-1">
@@ -86,32 +95,35 @@ export default function OrdersPage() {
                     <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">
                       Order #{order.id}
                     </span>
-                    <span className="bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-400 text-xs font-bold px-2 py-0.5 rounded-full">
+                    <span className="bg-green-50 dark:bg-green-950 text-green-600 dark:text-green-400 text-xs font-bold px-2 py-0.5 rounded-full">
                       {order.status}
                     </span>
                   </div>
-                  <p className="text-sm text-gray-500 dark:text-gray-300">{date} at {time}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{date} at {time}</p>
                   <p className="text-xs text-gray-400 mt-0.5">📍 {order.address}</p>
                 </div>
 
                 <div className="flex flex-col items-end gap-2">
-                  <span className="text-xl font-black text-blue-500">
+                  <span className="text-xl font-black text-indigo-600 dark:text-indigo-400">
                     ₹{order.total.toLocaleString("en-IN")}
                   </span>
                   <span className="text-xs text-gray-400">
                     {order.items.length} item{order.items.length !== 1 ? "s" : ""}
                   </span>
-                  <span className="text-xs text-blue-400">
+                  <span className="text-xs text-indigo-400 dark:text-indigo-500">
                     {isExpanded ? "▲ Hide" : "▼ Details"}
                   </span>
                 </div>
               </div>
 
-              
+             
               {isExpanded && (
-                <div className="border-t border-gray-100 dark:border-gray-600 px-5 pb-5 pt-4 flex flex-col gap-3">
+                <div className="border-t border-gray-100 dark:border-gray-800 px-5 pb-5 pt-4 flex flex-col gap-3">
                   {order.items.map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-4 bg-gray-50 dark:bg-gray-600 rounded-xl p-3">
+                    <div
+                      key={idx}
+                      className="flex items-center gap-4 bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-3 border border-gray-100 dark:border-gray-700"
+                    >
                       <img
                         src={item.image}
                         alt={item.name}
@@ -121,9 +133,13 @@ export default function OrdersPage() {
                         }
                       />
                       <div className="flex-1">
-                        <p className="text-xs text-blue-500 font-semibold uppercase">{item.category}</p>
-                        <p className="font-bold text-gray-800 dark:text-white text-sm leading-tight">{item.name}</p>
-                        <p className="text-xs text-gray-400 dark:text-gray-300 mt-0.5">
+                        <p className="text-xs text-indigo-500 font-semibold uppercase">
+                          {item.category}
+                        </p>
+                        <p className="font-bold text-gray-800 dark:text-white text-sm leading-tight">
+                          {item.name}
+                        </p>
+                        <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
                           ₹{item.price.toLocaleString("en-IN")} × {item.quantity}
                         </p>
                       </div>
@@ -133,18 +149,20 @@ export default function OrdersPage() {
                     </div>
                   ))}
 
-                  <div className="flex justify-between items-center pt-2 border-t border-gray-100 dark:border-gray-600">
-                    <span className="text-sm text-gray-400">Total Paid</span>
-                    <span className="text-lg font-black text-blue-500">
+                  <div className="flex justify-between items-center pt-3 border-t border-gray-100 dark:border-gray-800">
+                    <span className="text-sm text-gray-400 dark:text-gray-500">Total Paid</span>
+                    <span className="text-lg font-black text-indigo-600 dark:text-indigo-400">
                       ₹{order.total.toLocaleString("en-IN")}
                     </span>
                   </div>
                 </div>
               )}
+
             </div>
           );
         })}
       </div>
     </div>
-  );
+  </div>
+);
 }
