@@ -45,72 +45,108 @@ export default function Register() {
     }
   };
 return (
-  <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-950 dark:via-slate-900 dark:to-gray-900 px-4">
-    <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border border-gray-100 dark:border-gray-800 rounded-2xl p-8 w-full max-w-md">
+  <div className="min-h-screen flex items-center justify-center bg-white px-4">
+    <div className="bg-white border border-sky-100 rounded-2xl p-8 w-full max-w-md shadow-lg shadow-sky-100/50">
 
       {/* Header */}
-      <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Create Account</h2>
-        <p className="text-gray-400 dark:text-gray-500 text-sm mt-1">Join ShopZone today</p>
+      <div className="mb-8">
+        <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-sky-500 mb-1">
+          Get Started
+        </p>
+        <h2 className="text-2xl font-extrabold text-[#0c2340] tracking-tight">
+          Create Account
+        </h2>
+        <p className="text-sky-900/40 text-sm mt-1 font-light">
+          Join ShopHub today
+        </p>
       </div>
 
-      <div className="flex flex-col gap-4">
+      {/* Fields */}
+      <div className="flex flex-col gap-0">
 
-        <div>
+        <div className="flex flex-col mb-6">
+          <label className="text-[10px] font-semibold uppercase tracking-[0.22em] text-sky-900/40 mb-1">
+            Full Name
+          </label>
           <input
             name="name"
-            placeholder="Full Name"
+            placeholder="Your full name"
             onChange={handleChange}
-            className="border border-gray-200 dark:border-gray-700 bg-white/70 dark:bg-gray-800 text-gray-800 dark:text-white placeholder-gray-400 p-3 rounded-xl w-full focus:outline-none focus:ring-2 focus:ring-indigo-300 dark:focus:ring-indigo-700 transition"
+            className={`border-0 border-b-2 bg-transparent px-0 py-2 text-sm text-[#0c2340] placeholder-sky-900/20 outline-none transition
+              ${errors.name ? "border-red-300 focus:border-red-400" : "border-sky-100 focus:border-sky-400"}`}
           />
-          {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+          {errors.name && (
+            <p className="text-xs text-red-400 mt-1">{errors.name}</p>
+          )}
         </div>
 
-        <div>
+        <div className="flex flex-col mb-6">
+          <label className="text-[10px] font-semibold uppercase tracking-[0.22em] text-sky-900/40 mb-1">
+            Email
+          </label>
           <input
             name="email"
             type="email"
-            placeholder="Email"
+            placeholder="you@example.com"
             onChange={handleChange}
-            className="border border-gray-200 dark:border-gray-700 bg-white/70 dark:bg-gray-800 text-gray-800 dark:text-white placeholder-gray-400 p-3 rounded-xl w-full focus:outline-none focus:ring-2 focus:ring-indigo-300 dark:focus:ring-indigo-700 transition"
+            className={`border-0 border-b-2 bg-transparent px-0 py-2 text-sm text-[#0c2340] placeholder-sky-900/20 outline-none transition
+              ${errors.email ? "border-red-300 focus:border-red-400" : "border-sky-100 focus:border-sky-400"}`}
           />
-          {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+          {errors.email && (
+            <p className="text-xs text-red-400 mt-1">{errors.email}</p>
+          )}
         </div>
 
-        <div>
+        <div className="flex flex-col mb-6">
+          <label className="text-[10px] font-semibold uppercase tracking-[0.22em] text-sky-900/40 mb-1">
+            Password
+          </label>
           <input
             name="password"
             type="password"
-            placeholder="Password"
+            placeholder="Create a password"
             onChange={handleChange}
-            className="border border-gray-200 dark:border-gray-700 bg-white/70 dark:bg-gray-800 text-gray-800 dark:text-white placeholder-gray-400 p-3 rounded-xl w-full focus:outline-none focus:ring-2 focus:ring-indigo-300 dark:focus:ring-indigo-700 transition"
+            className={`border-0 border-b-2 bg-transparent px-0 py-2 text-sm text-[#0c2340] placeholder-sky-900/20 outline-none transition
+              ${errors.password ? "border-red-300 focus:border-red-400" : "border-sky-100 focus:border-sky-400"}`}
           />
-          {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
+          {errors.password && (
+            <p className="text-xs text-red-400 mt-1">{errors.password}</p>
+          )}
         </div>
 
-        <div>
+        <div className="flex flex-col mb-8">
+          <label className="text-[10px] font-semibold uppercase tracking-[0.22em] text-sky-900/40 mb-1">
+            Confirm Password
+          </label>
           <input
             name="confirmPassword"
             type="password"
-            placeholder="Confirm Password"
+            placeholder="Repeat your password"
             onChange={handleChange}
-            className="border border-gray-200 dark:border-gray-700 bg-white/70 dark:bg-gray-800 text-gray-800 dark:text-white placeholder-gray-400 p-3 rounded-xl w-full focus:outline-none focus:ring-2 focus:ring-indigo-300 dark:focus:ring-indigo-700 transition"
+            className={`border-0 border-b-2 bg-transparent px-0 py-2 text-sm text-[#0c2340] placeholder-sky-900/20 outline-none transition
+              ${errors.confirmPassword ? "border-red-300 focus:border-red-400" : "border-sky-100 focus:border-sky-400"}`}
           />
-          {errors.confirmPassword && <p className="text-red-500 text-xs mt-1">{errors.confirmPassword}</p>}
+          {errors.confirmPassword && (
+            <p className="text-xs text-red-400 mt-1">{errors.confirmPassword}</p>
+          )}
         </div>
 
         <button
           onClick={handleSubmit}
-          className="bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-medium transition cursor-pointer"
+          className="w-full text-white py-3 text-[11px] font-semibold uppercase tracking-widest rounded-xl transition hover:-translate-y-px cursor-pointer border-none"
+          style={{ background: "linear-gradient(135deg, #0ea5e9, #10b981)" }}
         >
           Create Account
         </button>
 
       </div>
 
-      <p className="text-sm text-center mt-5 text-gray-400 dark:text-gray-500">
+      <p className="text-sm text-center mt-6 text-sky-900/40 font-light">
         Already have an account?{" "}
-        <Link to="/login" className="text-indigo-500 hover:text-indigo-600 font-medium">
+        <Link
+          to="/login"
+          className="text-sky-500 hover:text-sky-600 font-semibold text-xs uppercase tracking-widest"
+        >
           Login
         </Link>
       </p>

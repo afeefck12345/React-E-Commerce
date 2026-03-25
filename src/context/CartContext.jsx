@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useState, useEffect } from "react";
 import API from "../services/api";
 import { useAuth } from "./AuthContext";
@@ -16,41 +17,50 @@ export const CartProvider = ({ children }) => {
       setCartItems([]);
       setLoading(false);
     }
-  }, [user?.id]);
+  }, [user?.loginAt]); 
 
-  const fetchCart = async () => {
-    setLoading(true);
-    try {
-      const res = await API.get(`/cart?userId=${Number(user.id)}`);
-      setCartItems(res.data);
-    } catch (err) {
-      console.error("Failed to fetch cart", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+
+const fetchCart = async () => {
+  setLoading(true);
+  try {
+    const res = await API.get(`/cart`); 
+    const userCart = res.data.filter(item => item.userId === user.id);
+    console.log(userCart)
+    setCartItems(userCart);
+  } catch (err) {
+    console.error("Failed to fetch cart", err);
+  } finally {
+    setLoading(false);
+  }
+};
 
   const addToCart = async (product, quantity = 1) => {
-    if (!user) return false;
+    if (!user || !user.id) return false; 
+
     const existing = cartItems.find((item) => item.productId === product.id);
     if (existing) {
-      const updated = { ...existing, quantity: existing.quantity + quantity };
+      const newQty = existing.quantity + quantity;
+
+      if (newQty > product.stock) {
+        return "out_of_stock";
+      }
+      const updated = { ...existing, quantity: newQty };
       await API.patch(`/cart/${existing.id}`, { quantity: updated.quantity });
       setCartItems((prev) =>
         prev.map((item) => (item.id === existing.id ? updated : item))
       );
     } else {
       const newItem = {
-        userId: Number(user.id),
+        userId: user.id, 
         productId: product.id,
         name: product.name,
         price: product.price,
         image: product.image,
         category: product.category,
+        stock: product.stock,
         quantity,
       };
       const res = await API.post("/cart", newItem);
-
       setCartItems((prev) => [...prev, res.data]);
     }
     return true;
@@ -58,10 +68,12 @@ export const CartProvider = ({ children }) => {
 
   const updateQuantity = async (cartItemId, newQuantity) => {
     if (newQuantity < 1) return;
+    const item = cartItems.find((i) => i.id === cartItemId);
+    if (item && newQuantity > item.stock) return;
     await API.patch(`/cart/${cartItemId}`, { quantity: newQuantity });
     setCartItems((prev) =>
-      prev.map((item) =>
-        item.id === cartItemId ? { ...item, quantity: newQuantity } : item
+      prev.map((i) =>
+        i.id === cartItemId ? { ...i, quantity: newQuantity } : i
       )
     );
   };
@@ -81,7 +93,8 @@ export const CartProvider = ({ children }) => {
   };
 
   const totalPrice = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity, 0
+    (sum, item) => sum + item.price * item.quantity,
+    0
   );
 
   const totalItems = cartItems.length;

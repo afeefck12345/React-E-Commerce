@@ -12,10 +12,10 @@ export default function CheckoutPage() {
   const [step, setStep] = useState("form");
   const [form, setForm] = useState({
     name: user?.name || "",
-    address: "",
-    city: "",
-    pincode: "",
-    cardNumber: "",
+    address: user?.address.street||"",
+    city: user?.address.city||"",
+    pincode: user?.address.pincode||"",
+    cardNumber:"",
     expiry: "",
     cvv: "",
   });
@@ -50,135 +50,214 @@ export default function CheckoutPage() {
     setErrors((prev) => ({ ...prev, [name]: undefined }));
   };
 
-  const handleSubmit = async () => {
-    if (!validate()) return;
+ const handleSubmit = async () => {
+  if (!validate()) return;
 
-    setStep("processing");
-    await new Promise((res) => setTimeout(res, 2500));
+  setStep("processing");
+  await new Promise((res) => setTimeout(res, 2500));
 
-    const order = {
-      userId: user.id,
-      items: cartItems,
-      total: totalPrice,
-      address: `${form.address}, ${form.city} - ${form.pincode}`,
-      date: new Date().toISOString(),
-      status: "Confirmed",
-    };
-
-    await API.post("/orders", order);
-
-    const captured = totalPrice;
-    await clearCart();
-    navigate("/order-success", { state: { total: captured } });
+  const order = {
+    userId: user.id,
+    items: cartItems,
+    total: totalPrice,
+    address: `${form.address}, ${form.city} - ${form.pincode}`,
+    date: new Date().toISOString(),
+    status: "pending",
   };
+
+  const res = await API.post("/orders", order);
+
+  const captured = totalPrice;
+  const capturedItems = [...cartItems]; // snapshot before clearCart wipes it
+  await clearCart();
+
+  navigate("/order-success", {
+    state: {
+      orderId: res.data.id,
+      total: captured,
+      items: capturedItems,
+      address: {
+        name: form.name,
+        line1: form.address,
+        city: form.city,
+        pincode: form.pincode,
+      },
+    },
+  });
+};
 
 if (step === "processing") {
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-950 dark:via-slate-900 dark:to-gray-900 flex flex-col items-center justify-center gap-5">
-      <div className="w-16 h-16 border-4 border-indigo-200 border-t-indigo-500 rounded-full animate-spin" />
-      <p className="text-xl font-bold text-gray-900 dark:text-white">Processing Payment...</p>
-      <p className="text-sm text-gray-400">Please don't close this page</p>
+    <div className="min-h-screen bg-white flex flex-col items-center justify-center gap-5">
+      <div
+        className="w-12 h-12 rounded-full animate-spin"
+        style={{
+          border: "3px solid rgba(14,165,233,0.15)",
+          borderTop: "3px solid #0ea5e9",
+        }}
+      />
+      <p className="text-xl font-extrabold text-[#0c2340] tracking-tight">
+        Processing Payment...
+      </p>
+      <p className="text-[11px] text-sky-900/35 uppercase tracking-widest font-semibold">
+        Please don't close this page
+      </p>
     </div>
   );
 }
 
- return (
-  <div className="min-h-screen bg-linear-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-950 dark:via-slate-900 dark:to-gray-900 px-4 py-10">
+return (
+  <div className="min-h-screen bg-white px-4 py-8">
     <div className="max-w-5xl mx-auto">
 
-      <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Checkout</h1>
-        <p className="text-gray-400 dark:text-gray-500 text-sm mt-1">
+      {/* Page Header */}
+      <div className="mb-8">
+        <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-sky-500 mb-1">
+          Final Step
+        </p>
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0c2340] tracking-tight">
+          Checkout
+        </h1>
+        <p className="text-sm text-sky-900/40 mt-1 font-light">
           Complete your order below
         </p>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-6">
+      <div className="flex flex-col lg:flex-row gap-5">
 
-        <div className="flex-1 flex flex-col gap-5">
+        {/* Left: Forms */}
+        <div className="flex-1 flex flex-col gap-4">
 
-          
-          <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border border-gray-100 dark:border-gray-800 rounded-2xl p-6">
-            <h2 className="text-lg font-bold mb-4 text-gray-900 dark:text-white">
-              📦 Delivery Details
-            </h2>
-            <div className="flex flex-col gap-3">
-              <Field label="Full Name" name="name" value={form.name} onChange={handleChange} error={errors.name} placeholder="John Doe" />
-              <Field label="Address" name="address" value={form.address} onChange={handleChange} error={errors.address} placeholder="123, Street Name" />
-              <div className="flex gap-3">
-                <Field label="City" name="city" value={form.city} onChange={handleChange} error={errors.city} placeholder="Mumbai" />
+          {/* Delivery Details */}
+          <div className="bg-white border border-sky-100 rounded-2xl overflow-hidden shadow-sm shadow-sky-100/40">
+            <div
+              className="px-6 py-4 border-b border-sky-100"
+              style={{ background: "linear-gradient(135deg, #eefbff, #e8fff6)" }}
+            >
+              <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-sky-500 mb-0.5">
+                Step 1
+              </p>
+              <h2 className="text-sm font-bold text-[#0c2340]">
+                📦 Delivery Details
+              </h2>
+            </div>
+            <div className="px-6 py-5 flex flex-col gap-0">
+              <Field label="Full Name"  name="name"    value={form.name}    onChange={handleChange} error={errors.name}    placeholder="John Doe" />
+              <Field label="Address"    name="address" value={form.address} onChange={handleChange} error={errors.address} placeholder="123, Street Name" />
+              <div className="flex flex-col sm:flex-row gap-0 sm:gap-6">
+                <Field label="City"    name="city"    value={form.city}    onChange={handleChange} error={errors.city}    placeholder="Mumbai" />
                 <Field label="Pincode" name="pincode" value={form.pincode} onChange={handleChange} error={errors.pincode} placeholder="400001" />
               </div>
             </div>
           </div>
 
-          
-          <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border border-gray-100 dark:border-gray-800 rounded-2xl p-6">
-            <h2 className="text-lg font-bold mb-4 text-gray-900 dark:text-white">
-              💳 Payment Details
-            </h2>
-            <div className="flex flex-col gap-3">
+          {/* Payment Details */}
+          <div className="bg-white border border-sky-100 rounded-2xl overflow-hidden shadow-sm shadow-sky-100/40">
+            <div
+              className="px-6 py-4 border-b border-sky-100"
+              style={{ background: "linear-gradient(135deg, #eefbff, #e8fff6)" }}
+            >
+              <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-sky-500 mb-0.5">
+                Step 2
+              </p>
+              <h2 className="text-sm font-bold text-[#0c2340]">
+                💳 Payment Details
+              </h2>
+            </div>
+            <div className="px-6 py-5 flex flex-col gap-0">
               <Field label="Card Number" name="cardNumber" value={form.cardNumber} onChange={handleChange} error={errors.cardNumber} placeholder="1234 5678 9012 3456" />
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-0 sm:gap-6">
                 <Field label="Expiry" name="expiry" value={form.expiry} onChange={handleChange} error={errors.expiry} placeholder="MM/YY" />
-                <Field label="CVV" name="cvv" value={form.cvv} onChange={handleChange} error={errors.cvv} placeholder="123" type="password" />
+                <Field label="CVV"    name="cvv"    value={form.cvv}    onChange={handleChange} error={errors.cvv}    placeholder="123" type="password" />
               </div>
             </div>
           </div>
 
         </div>
 
-        
-        <div className="lg:w-80">
-          <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border border-gray-100 dark:border-gray-800 rounded-2xl p-6 sticky top-6">
-            <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-              Order Summary
-            </h2>
+        {/* Right: Order Summary */}
+        <div className="w-full lg:w-80 shrink-0">
+          <div className="bg-white border border-sky-100 rounded-2xl sticky top-6 overflow-hidden shadow-xl shadow-sky-100/40">
 
-            <div className="flex flex-col gap-3 mb-4 max-h-52 overflow-y-auto pr-1">
+            {/* Header */}
+            <div
+              className="px-5 py-4 border-b border-sky-100"
+              style={{ background: "linear-gradient(135deg, #eefbff, #e8fff6)" }}
+            >
+              <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-sky-500 mb-0.5">
+                Review
+              </p>
+              <h2 className="text-sm font-bold text-[#0c2340]">
+                Order Summary
+              </h2>
+            </div>
+
+            {/* Items */}
+            <div className="px-5 py-4 flex flex-col gap-3 max-h-52 overflow-y-auto">
               {cartItems.map((item) => (
-                <div key={item.id} className="flex justify-between text-sm text-gray-500 dark:text-gray-400">
-                  <span className="truncate w-40">{item.name} × {item.quantity}</span>
-                  <span className="font-medium">₹{(item.price * item.quantity).toLocaleString("en-IN")}</span>
+                <div key={item.id} className="flex justify-between text-sm text-sky-900/45">
+                  <span className="truncate w-40 font-light">
+                    {item.name} × {item.quantity}
+                  </span>
+                  <span className="font-semibold text-[#0c2340]">
+                    ₹{(item.price * item.quantity).toLocaleString("en-IN")}
+                  </span>
                 </div>
               ))}
             </div>
 
-            <hr className="border-gray-200 dark:border-gray-700 mb-4" />
-
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-sm text-gray-400 dark:text-gray-500">Subtotal</span>
-              <span className="font-medium text-gray-800 dark:text-white">
-                ₹{totalPrice.toLocaleString("en-IN")}
-              </span>
-            </div>
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-sm text-gray-400 dark:text-gray-500">Delivery</span>
-              <span className="text-green-500 font-medium text-sm">FREE</span>
-            </div>
-
-            <hr className="border-gray-200 dark:border-gray-700 my-3" />
-
-            <div className="flex justify-between items-center mb-6">
-              <span className="text-lg font-bold text-gray-900 dark:text-white">Total</span>
-              <span className="text-2xl font-black text-indigo-600 dark:text-indigo-400">
-                ₹{totalPrice.toLocaleString("en-IN")}
-              </span>
-            </div>
-
-            <button
-              onClick={handleSubmit}
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-bold active:scale-95 transition cursor-pointer"
+            {/* Totals + Actions */}
+            <div
+              className="px-5 py-4 border-t border-sky-100 flex flex-col gap-3"
+              style={{ background: "linear-gradient(135deg, rgba(14,165,233,0.03), rgba(16,185,129,0.03))" }}
             >
-              Pay Now ⚡
-            </button>
+              <div className="flex justify-between items-center">
+                <span className="text-[10px] font-semibold uppercase tracking-widest text-sky-900/35">
+                  Subtotal
+                </span>
+                <span className="text-sm font-semibold text-[#0c2340]">
+                  ₹{totalPrice.toLocaleString("en-IN")}
+                </span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-[10px] font-semibold uppercase tracking-widest text-sky-900/35">
+                  Delivery
+                </span>
+                <span className="text-sm font-bold text-emerald-500 uppercase tracking-wide">
+                  Free
+                </span>
+              </div>
 
-            <button
-              onClick={() => navigate("/cart")}
-              className="w-full mt-3 py-2.5 rounded-xl text-sm text-gray-400 dark:text-gray-500 border border-gray-200 dark:border-gray-700 hover:bg-white/60 dark:hover:bg-gray-800 transition cursor-pointer"
-            >
-              ← Back to Cart
-            </button>
+              <div
+                className="pt-3 flex justify-between items-center"
+                style={{ borderTop: "1px solid rgba(14,165,233,0.15)" }}
+              >
+                <span className="text-[11px] font-semibold uppercase tracking-widest text-[#0c2340]">
+                  Total
+                </span>
+                <span
+                  className="text-xl font-extrabold bg-clip-text text-transparent"
+                  style={{ backgroundImage: "linear-gradient(135deg, #0ea5e9, #10b981)" }}
+                >
+                  ₹{totalPrice.toLocaleString("en-IN")}
+                </span>
+              </div>
+
+              <button
+                onClick={handleSubmit}
+                className="w-full text-white py-3 text-[11px] font-semibold uppercase tracking-widest rounded-xl transition hover:-translate-y-px cursor-pointer border-none mt-1"
+                style={{ background: "linear-gradient(135deg, #0ea5e9, #10b981)" }}
+              >
+                Pay Now ⚡
+              </button>
+
+              <button
+                onClick={() => navigate("/cart")}
+                className="w-full py-2.5 text-[11px] font-semibold uppercase tracking-widest text-sky-900/40 border border-sky-100 rounded-xl hover:bg-sky-50 hover:text-sky-600 transition cursor-pointer"
+              >
+                ← Back to Cart
+              </button>
+            </div>
 
           </div>
         </div>
@@ -191,21 +270,20 @@ if (step === "processing") {
 
 function Field({ label, name, value, onChange, error, placeholder, type = "text" }) {
   return (
-    <div className="flex flex-col gap-1 flex-1">
-      <label className="text-sm font-semibold text-gray-600 dark:text-gray-300">{label}</label>
+    <div className="flex flex-col flex-1 mb-6">
+      <label className="text-[10px] font-semibold uppercase tracking-[0.2em] text-sky-900/40 mb-1">
+        {label}
+      </label>
       <input
         type={type}
         name={name}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`px-4 py-2.5 rounded-xl border text-sm bg-white/70 dark:bg-gray-800/50 dark:text-white dark:placeholder-gray-500 outline-none focus:ring-2 focus:ring-indigo-300 dark:focus:ring-indigo-700 transition ${
-          error
-            ? "border-red-400 bg-red-50 dark:bg-red-900/20"
-            : "border-gray-200 dark:border-gray-700"
-        }`}
+        className={`border-0 border-b-2 bg-transparent px-0 py-2 text-sm text-[#0c2340] placeholder-sky-900/20 outline-none transition
+          ${error ? "border-red-300 focus:border-red-400" : "border-sky-100 focus:border-sky-400"}`}
       />
-      {error && <p className="text-xs text-red-500">{error}</p>}
+      {error && <p className="text-xs text-red-400 mt-1">{error}</p>}
     </div>
   );
 }

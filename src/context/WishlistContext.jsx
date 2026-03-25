@@ -15,32 +15,34 @@ export const WishlistProvider = ({ children }) => {
     } else {
       setWishlistItems([]);
     }
-  }, [user?.id]);
+  }, [user?.loginAt]); 
 
   const fetchWishlist = async () => {
-    setLoading(true);
-    try {
-      const res = await API.get(`/wishlist?userId=${Number(user.id)}`);
-      setWishlistItems(res.data);
-    } catch (err) {
-      console.error("Failed to fetch wishlist", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  setLoading(true);
+  try {
+    const res = await API.get(`/wishlist`); 
+    const userWishlist = res.data.filter(item => item.userId === user.id); 
+    setWishlistItems(userWishlist);
+  } catch (err) {
+    console.error("Failed to fetch wishlist", err);
+  } finally {
+    setLoading(false);
+  }
+};
 
   const addToWishlist = async (product) => {
-    if (!user) return false;
+    if (!user || !user.id) return false; 
     const existing = wishlistItems.find((item) => item.productId === product.id);
     if (existing) return false;
 
     const newItem = {
-      userId: Number(user.id),  
+      userId: user.id, 
       productId: product.id,
       name: product.name,
       price: product.price,
       image: product.image,
       category: product.category,
+      stock: product.stock,
     };
 
     const res = await API.post("/wishlist", newItem);
@@ -88,6 +90,3 @@ export const WishlistProvider = ({ children }) => {
 };
 
 export const useWishlist = () => useContext(WishlistContext);
-
-
-    

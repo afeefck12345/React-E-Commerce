@@ -5,21 +5,24 @@
       "name": "Admin",
       "email": "admin@gmail.com",
       "password": "admin123",
-      "role": "admin"
+      "role": "admin",
+      "blocked": false
     },
     {
       "id": "a534",
       "name": "Afeef ck",
       "email": "afeefck7@gmail.com",
       "password": "Afeef@2486",
-      "role": "user"
+      "role": "user",
+      "blocked": false
     },
     {
       "id": "767d",
       "name": "Afi",
       "email": "asdfg",
       "password": "123456",
-      "role": "user"
+      "role": "user",
+      "active": false
     },
     {
       "id": "0575",
@@ -33,14 +36,8 @@
       "name": "afeef12",
       "email": "afeefck@12gmail.com",
       "password": "Afeef12",
-      "role": "user"
-    },
-    {
-      "id": "fae3",
-      "name": "afeef13",
-      "email": "afeefck@13gmail.com",
-      "password": "Afeef13",
-      "role": "user"
+      "role": "user",
+      "blocked": false
     },
     {
       "id": "cab2",
@@ -54,25 +51,87 @@
       "name": "Afeef ",
       "email": "afeefck10@gmail.com",
       "password": "Afeef10",
-      "role": "user"
+      "role": "user",
+      "loginAt": 1774345504388,
+      "address": {
+        "street": "Kasthuri house, near nikshan godown,Moonunirath,Azhikode po",
+        "city": "Kannur",
+        "state": "Kerala",
+        "pincode": "670009",
+        "country": "India"
+      }
     },
     {
       "id": "a183",
       "name": "jaison",
       "email": "jaison7@gmail.com",
       "password": "Jaison7",
+      "role": "user",
+      "loginAt": 1774341547955,
+      "address": {
+        "street": "Elite mens hostel,near malabar hospital,manjeri",
+        "city": "Manjeri",
+        "state": "Kerala",
+        "pincode": "676121",
+        "country": "India"
+      }
+    },
+    {
+      "id": "3608",
+      "name": "Fazal11",
+      "email": "fazal11@gmail.com",
+      "password": "Fazal11",
+      "role": "user",
+      "blocked": false,
+      "active": false
+    },
+    {
+      "id": "47e1",
+      "name": "Afii",
+      "email": "afeefck19@gmail.com",
+      "password": "Afeef19",
+      "role": "user",
+      "loginAt": 1773721123980,
+      "address": {
+        "street": "Azhikode",
+        "city": "Kannur",
+        "state": "Kerala",
+        "pincode": "670009",
+        "country": "India"
+      }
+    },
+    {
+      "id": "d3d7",
+      "name": "Arshak",
+      "email": "arshak17@gmail.com",
+      "password": "Arshak17",
+      "role": "user"
+    },
+    {
+      "id": "4746",
+      "name": "saali",
+      "email": "saali17@gmail.com",
+      "password": "Saali17",
+      "role": "user",
+      "blocked": false
+    },
+    {
+      "id": "22b5",
+      "name": "basil",
+      "email": "basil17@gmail.com",
+      "password": "Basil17",
       "role": "user"
     }
   ],
   "products": [
     {
-      "id": "p001",
       "name": "iPhone 15 Pro",
       "category": "Electronics",
-      "price": 999,
+      "price": "45000",
       "image": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400",
+      "stock": 10,
       "description": "Latest Apple iPhone with A17 Pro chip.",
-      "stock": 10
+      "id": "p001"
     },
     {
       "id": "p002",
@@ -111,13 +170,13 @@
       "stock": 7
     },
     {
-      "id": "p006",
       "name": "Samsung 4K Smart TV",
       "category": "Electronics",
       "price": 799,
-      "image": "https://images.unsplash.com/photo-1461151304267-38535e780c79?w=400",
+      "stock": "7",
       "description": "55 inch 4K UHD Smart TV with HDR.",
-      "stock": 6
+      "image": "https://images.unsplash.com/photo-1461151304267-38535e780c79?w=400",
+      "id": "p006"
     },
     {
       "id": "p007",
@@ -262,996 +321,415 @@
       "image": "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400",
       "description": "Rules for focused success by Cal Newport.",
       "stock": 35
+    },
+    {
+      "id": "b103",
+      "name": "Iphone 13",
+      "category": "Electronics",
+      "price": "42000",
+      "image": "https://images.unsplash.com/photo-1632661674596-df8be070a5c5?w=400",
+      "stock": "10",
+      "description": ""
+    },
+    {
+      "name": "Iphone 13 Pro",
+      "category": "Electronics",
+      "price": "60000",
+      "stock": "15",
+      "description": "",
+      "image": "https://images.unsplash.com/photo-1664478546384-d57ffe74a78c?w=400",
+      "id": "7e70"
+    },
+    {
+      "name": "Hoodie",
+      "category": "Clothing",
+      "price": "1000",
+      "stock": "7",
+      "description": "",
+      "image": "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=400",
+      "id": "e6fc"
+    },
+    {
+      "id": "f528",
+      "name": "oyak",
+      "category": "Clothing",
+      "price": "450",
+      "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
+      "stock": "5",
+      "description": ""
+    },
+    {
+      "id": "987b",
+      "name": "oyak2.0",
+      "category": "Clothing",
+      "price": "450",
+      "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
+      "stock": "10",
+      "description": "",
+      "active": false
     }
   ],
   "cart": [
     {
-      "id": "a510",
-      "userId": "fae3",
+      "id": "e0cd",
+      "userId": "47e1",
       "productId": "p003",
       "name": "Sony WH-1000XM5",
       "price": 349,
       "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
       "category": "Electronics",
-      "quantity": 1
-    },
-    {
-      "id": "45d3",
-      "userId": "fae3",
-      "productId": "p004",
-      "name": "MacBook Air M2",
-      "price": 1199,
-      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400",
-      "category": "Electronics",
-      "quantity": 3
-    },
-    {
-      "id": "946a",
-      "userId": "a183",
-      "productId": "p002",
-      "name": "Samsung Galaxy S24",
-      "price": 849,
-      "image": "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400",
-      "category": "Electronics",
-      "quantity": 1
-    },
-    {
-      "id": "1844",
-      "userId": "a183",
-      "productId": "p003",
-      "name": "Sony WH-1000XM5",
-      "price": 349,
-      "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
-      "category": "Electronics",
-      "quantity": 1
-    },
-    {
-      "id": "df62",
-      "userId": null,
-      "productId": "p004",
-      "name": "MacBook Air M2",
-      "price": 1199,
-      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400",
-      "category": "Electronics",
-      "quantity": 1
-    },
-    {
-      "id": "46b6",
-      "userId": null,
-      "productId": "p003",
-      "name": "Sony WH-1000XM5",
-      "price": 349,
-      "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
-      "category": "Electronics",
+      "stock": 15,
       "quantity": 2
+    },
+    {
+      "id": "b38d",
+      "userId": "a183",
+      "productId": "p003",
+      "name": "Sony WH-1000XM5",
+      "price": 349,
+      "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
+      "category": "Electronics",
+      "stock": 15,
+      "quantity": 1
     }
   ],
   "wishlist": [],
   "orders": [
     {
-      "id": "a453",
-      "userId": "0575",
+      "id": "ad5f",
+      "userId": "47e1",
       "items": [
         {
-          "id": "49aa",
-          "userId": "0575",
+          "id": "e13b",
+          "userId": "47e1",
           "productId": "p003",
           "name": "Sony WH-1000XM5",
           "price": 349,
           "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
           "category": "Electronics",
-          "quantity": 1
-        },
-        {
-          "id": "e158",
-          "userId": "0575",
-          "productId": "p004",
-          "name": "MacBook Air M2",
-          "price": 1199,
-          "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400",
-          "category": "Electronics",
-          "quantity": 2
-        },
-        {
-          "id": "6767",
-          "userId": "0575",
-          "productId": "p008",
-          "name": "Men's Polo T-Shirt",
-          "price": 35,
-          "image": "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=400",
-          "category": "Clothing",
-          "quantity": 1
-        }
-      ],
-      "total": 2782,
-      "address": "123,kerala, kannur - 670008",
-      "date": "2026-03-11T07:23:57.375Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "fa65",
-      "userId": "04e2",
-      "items": [
-        {
-          "id": "9343",
-          "userId": "04e2",
-          "productId": "p003",
-          "name": "Sony WH-1000XM5",
-          "price": 349,
-          "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
-          "category": "Electronics",
-          "quantity": 3
-        }
-      ],
-      "total": 1047,
-      "address": "123,kerala, kannur - 670008",
-      "date": "2026-03-11T08:00:53.807Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "22ff",
-      "userId": "04e2",
-      "items": [
-        {
-          "id": "ddda",
-          "userId": "04e2",
-          "productId": "p003",
-          "name": "Sony WH-1000XM5",
-          "price": 349,
-          "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
-          "category": "Electronics",
-          "quantity": 3
-        }
-      ],
-      "total": 1047,
-      "address": "Kasthuri house, near nikshan godown,Moonunirath,Azhikode po, Kannur - 670009",
-      "date": "2026-03-11T15:46:49.295Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "8ed1",
-      "userId": "04e2",
-      "items": [
-        {
-          "id": "7184",
-          "userId": "04e2",
-          "productId": "p003",
-          "name": "Sony WH-1000XM5",
-          "price": 349,
-          "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
-          "category": "Electronics",
+          "stock": 15,
           "quantity": 1
         }
       ],
       "total": 349,
-      "address": "Kasthuri house, near nikshan godown,Moonunirath,Azhikode po, Kannur - 670009",
-      "date": "2026-03-11T15:49:23.124Z",
+      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
+      "date": "2026-03-17T10:54:24.188Z",
       "status": "Confirmed"
     },
     {
-      "id": "8f80",
-      "userId": "04e2",
+      "id": "d467",
+      "userId": "1",
       "items": [
         {
-          "id": "067a",
-          "userId": "04e2",
+          "id": "fa50",
+          "userId": "1",
           "productId": "p002",
           "name": "Samsung Galaxy S24",
           "price": 849,
           "image": "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400",
           "category": "Electronics",
-          "quantity": 2
-        }
-      ],
-      "total": 1698,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-11T15:50:06.540Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "8e6b",
-      "userId": "04e2",
-      "items": [],
-      "total": 0,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-11T15:51:42.817Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "16df",
-      "userId": "04e2",
-      "items": [],
-      "total": 0,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-11T16:00:05.272Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "2e73",
-      "userId": "04e2",
-      "items": [],
-      "total": 0,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-11T16:03:43.762Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "ce84",
-      "userId": "04e2",
-      "items": [],
-      "total": 0,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-11T16:08:23.818Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "fed0",
-      "userId": "04e2",
-      "items": [
-        {
-          "id": "6090",
-          "userId": "04e2",
-          "productId": "p003",
-          "name": "Sony WH-1000XM5",
-          "price": 349,
-          "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
-          "category": "Electronics",
-          "quantity": 2
-        }
-      ],
-      "total": 698,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-11T16:09:16.051Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "1fdc",
-      "userId": "04e2",
-      "items": [
-        {
-          "id": "5eab",
-          "userId": "04e2",
-          "productId": "p003",
-          "name": "Sony WH-1000XM5",
-          "price": 349,
-          "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
-          "category": "Electronics",
-          "quantity": 1
-        }
-      ],
-      "total": 349,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-11T16:16:40.669Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "498e",
-      "userId": "04e2",
-      "items": [],
-      "total": 0,
-      "address": "Kasthuri house, near nikshan godown,Moonunirath,Azhikode po, Kannur - 670009",
-      "date": "2026-03-11T16:21:04.394Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "0d97",
-      "userId": "04e2",
-      "items": [
-        {
-          "id": "d87a",
-          "userId": "04e2",
-          "productId": "p003",
-          "name": "Sony WH-1000XM5",
-          "price": 349,
-          "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
-          "category": "Electronics",
-          "quantity": 2
-        }
-      ],
-      "total": 698,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-11T16:26:53.874Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "ff20",
-      "userId": "04e2",
-      "items": [
-        {
-          "id": "d898",
-          "userId": "04e2",
-          "productId": "p008",
-          "name": "Men's Polo T-Shirt",
-          "price": 35,
-          "image": "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=400",
-          "category": "Clothing",
-          "quantity": 1
-        }
-      ],
-      "total": 35,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-11T16:30:29.402Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "cdfe",
-      "userId": "04e2",
-      "items": [
-        {
-          "id": "75fa",
-          "userId": "04e2",
-          "productId": "p003",
-          "name": "Sony WH-1000XM5",
-          "price": 349,
-          "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
-          "category": "Electronics",
-          "quantity": 2
-        }
-      ],
-      "total": 698,
-      "address": "Kasthuri house, near nikshan godown,Moonunirath,Azhikode po, Kannur - 670009",
-      "date": "2026-03-11T16:33:21.382Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "ea90",
-      "userId": "04e2",
-      "items": [
-        {
-          "id": "7156",
-          "userId": "04e2",
-          "productId": "p005",
-          "name": "iPad Pro 12.9",
-          "price": 1099,
-          "image": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400",
-          "category": "Electronics",
-          "quantity": 1
-        }
-      ],
-      "total": 1099,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-11T16:34:16.364Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "7cf8",
-      "userId": "04e2",
-      "items": [
-        {
-          "id": "893b",
-          "userId": "04e2",
-          "productId": "p007",
-          "name": "Levi's 501 Jeans",
-          "price": 80,
-          "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400",
-          "category": "Clothing",
-          "quantity": 2
-        }
-      ],
-      "total": 160,
-      "address": "Kasthuri house, near nikshan godown,Moonunirath,Azhikode po, Kannur - 670009",
-      "date": "2026-03-12T04:03:03.743Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "4128",
-      "userId": "04e2",
-      "items": [
-        {
-          "id": "65e6",
-          "userId": "04e2",
-          "productId": "p006",
-          "name": "Samsung 4K Smart TV",
-          "price": 799,
-          "image": "https://images.unsplash.com/photo-1461151304267-38535e780c79?w=400",
-          "category": "Electronics",
-          "quantity": 1
-        }
-      ],
-      "total": 799,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-12T04:09:42.787Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "adf7",
-      "userId": "04e2",
-      "items": [
-        {
-          "id": "dd29",
-          "userId": "04e2",
-          "productId": "p006",
-          "name": "Samsung 4K Smart TV",
-          "price": 799,
-          "image": "https://images.unsplash.com/photo-1461151304267-38535e780c79?w=400",
-          "category": "Electronics",
-          "quantity": 1
-        }
-      ],
-      "total": 799,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-12T04:10:31.303Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "afe8",
-      "userId": "0575",
-      "items": [
-        {
-          "id": "0580",
-          "userId": "0575",
-          "productId": "p004",
-          "name": "MacBook Air M2",
-          "price": 1199,
-          "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400",
-          "category": "Electronics",
+          "stock": 8,
           "quantity": 1
         },
         {
-          "id": "8ce7",
-          "userId": "0575",
-          "productId": "p007",
-          "name": "Levi's 501 Jeans",
-          "price": 80,
-          "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400",
-          "category": "Clothing",
-          "quantity": 2
-        }
-      ],
-      "total": 1359,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-12T05:32:30.086Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "8cc3",
-      "userId": "0575",
-      "items": [
-        {
-          "id": "01d7",
-          "userId": "0575",
+          "id": "50ca",
+          "userId": "1",
           "productId": "p003",
           "name": "Sony WH-1000XM5",
           "price": 349,
           "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
           "category": "Electronics",
-          "quantity": 4
-        }
-      ],
-      "total": 1396,
-      "address": "Kasthuri house, near nikshan godown,Moonunirath,Azhikode po, Kannur - 670009",
-      "date": "2026-03-12T05:36:23.529Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "8056",
-      "userId": "0575",
-      "items": [
-        {
-          "id": "da15",
-          "userId": "0575",
-          "productId": "p003",
-          "name": "Sony WH-1000XM5",
-          "price": 349,
-          "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
-          "category": "Electronics",
-          "quantity": 1
-        }
-      ],
-      "total": 349,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-12T05:46:29.429Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "62db",
-      "userId": "0575",
-      "items": [
-        {
-          "id": "ec81",
-          "userId": "0575",
-          "productId": "p002",
-          "name": "Samsung Galaxy S24",
-          "price": 849,
-          "image": "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400",
-          "category": "Electronics",
-          "quantity": 1
-        }
-      ],
-      "total": 849,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-12T05:47:12.790Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "d928",
-      "userId": "0575",
-      "items": [
-        {
-          "id": "2d92",
-          "userId": "0575",
-          "productId": "p007",
-          "name": "Levi's 501 Jeans",
-          "price": 80,
-          "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400",
-          "category": "Clothing",
-          "quantity": 1
-        }
-      ],
-      "total": 80,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-12T05:49:21.040Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "124a",
-      "userId": "0575",
-      "items": [
-        {
-          "id": "e4f3",
-          "userId": "0575",
-          "productId": "p001",
-          "name": "iPhone 15 Pro",
-          "price": 999,
-          "image": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400",
-          "category": "Electronics",
-          "quantity": 1
-        }
-      ],
-      "total": 999,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-12T05:52:24.363Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "922e",
-      "userId": "0575",
-      "items": [
-        {
-          "id": "05cb",
-          "userId": "0575",
-          "productId": "p003",
-          "name": "Sony WH-1000XM5",
-          "price": 349,
-          "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
-          "category": "Electronics",
-          "quantity": 1
-        }
-      ],
-      "total": 349,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-12T06:01:21.370Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "5d14",
-      "userId": "0575",
-      "items": [
-        {
-          "id": "327e",
-          "userId": "0575",
-          "productId": "p006",
-          "name": "Samsung 4K Smart TV",
-          "price": 799,
-          "image": "https://images.unsplash.com/photo-1461151304267-38535e780c79?w=400",
-          "category": "Electronics",
-          "quantity": 1
-        }
-      ],
-      "total": 799,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-12T06:06:50.043Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "10b1",
-      "userId": "fae3",
-      "items": [
-        {
-          "id": "5e05",
-          "userId": "fae3",
-          "productId": "p003",
-          "name": "Sony WH-1000XM5",
-          "price": 349,
-          "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
-          "category": "Electronics",
-          "quantity": 2
-        }
-      ],
-      "total": 698,
-      "address": "Kasthuri house, near nikshan godown,Moonunirath,Azhikode po, Kannur - 670009",
-      "date": "2026-03-12T06:47:15.974Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "98f6",
-      "userId": "0575",
-      "items": [
-        {
-          "id": "27eb",
-          "userId": "0575",
-          "productId": "p003",
-          "name": "Sony WH-1000XM5",
-          "price": 349,
-          "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
-          "category": "Electronics",
-          "quantity": 1
-        }
-      ],
-      "total": 349,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-12T07:13:58.277Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "7635",
-      "userId": "0575",
-      "items": [
-        {
-          "id": "f59a",
-          "userId": "0575",
-          "productId": "p003",
-          "name": "Sony WH-1000XM5",
-          "price": 349,
-          "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
-          "category": "Electronics",
-          "quantity": 3
-        }
-      ],
-      "total": 1047,
-      "address": "Kasthuri house, near nikshan godown,Moonunirath,Azhikode po, Kannur - 670009",
-      "date": "2026-03-12T08:57:26.715Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "14d5",
-      "userId": "2297",
-      "items": [
-        {
-          "id": "463d",
-          "userId": "2297",
-          "productId": "p003",
-          "name": "Sony WH-1000XM5",
-          "price": 349,
-          "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
-          "category": "Electronics",
-          "quantity": 5
-        }
-      ],
-      "total": 1745,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-12T09:02:46.407Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "e713",
-      "userId": "2297",
-      "items": [
-        {
-          "id": "80ce",
-          "userId": "2297",
-          "productId": "p010",
-          "name": "Hooded Sweatshirt",
-          "price": 55,
-          "image": "https://images.unsplash.com/photo-1509942774463-acf339cf87d5?w=400",
-          "category": "Clothing",
-          "quantity": 2
-        }
-      ],
-      "total": 110,
-      "address": "Kasthuri house, near nikshan godown,Moonunirath,Azhikode po, Kannur - 670009",
-      "date": "2026-03-12T09:17:45.430Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "163d",
-      "userId": "2297",
-      "items": [
-        {
-          "id": "d6fa",
-          "userId": "2297",
-          "productId": "p004",
-          "name": "MacBook Air M2",
-          "price": 1199,
-          "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400",
-          "category": "Electronics",
-          "quantity": 2
-        }
-      ],
-      "total": 2398,
-      "address": "Kasthuri house, near nikshan godown,Moonunirath,Azhikode po, Kannur - 670009",
-      "date": "2026-03-12T09:36:16.882Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "1387",
-      "userId": "cab2",
-      "items": [
-        {
-          "id": "b52d",
-          "userId": "cab2",
-          "productId": "p003",
-          "name": "Sony WH-1000XM5",
-          "price": 349,
-          "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
-          "category": "Electronics",
-          "quantity": 1
-        },
-        {
-          "id": "59ca",
-          "userId": "cab2",
-          "productId": "p011",
-          "name": "Nike Air Max 270",
-          "price": 150,
-          "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",
-          "category": "Shoes",
-          "quantity": 1
-        },
-        {
-          "id": "efc6",
-          "userId": "cab2",
-          "productId": "p012",
-          "name": "Adidas Ultraboost 22",
-          "price": 180,
-          "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=400",
-          "category": "Shoes",
-          "quantity": 1
-        },
-        {
-          "id": "a5db",
-          "userId": "cab2",
-          "productId": "p020",
-          "name": "Atomic Habits",
-          "price": 18,
-          "image": "https://images.unsplash.com/photo-1535398089889-dd807df1dfaa?w=400",
-          "category": "Books",
-          "quantity": 1
-        }
-      ],
-      "total": 697,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-12T11:06:35.894Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "be69",
-      "userId": "cab2",
-      "items": [
-        {
-          "id": "ff27",
-          "userId": "cab2",
-          "productId": "p007",
-          "name": "Levi's 501 Jeans",
-          "price": 80,
-          "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400",
-          "category": "Clothing",
-          "quantity": 1
-        }
-      ],
-      "total": 80,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-12T11:08:05.683Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "5c9a",
-      "userId": "cab2",
-      "items": [
-        {
-          "id": "1881",
-          "userId": "cab2",
-          "productId": "p004",
-          "name": "MacBook Air M2",
-          "price": 1199,
-          "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400",
-          "category": "Electronics",
-          "quantity": 2
-        }
-      ],
-      "total": 2398,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-12T14:33:32.961Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "577b",
-      "userId": "2297",
-      "items": [
-        {
-          "id": "2315",
-          "userId": "2297",
-          "productId": "p009",
-          "name": "Women's Floral Dress",
-          "price": 60,
-          "image": "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400",
-          "category": "Clothing",
-          "quantity": 1
-        },
-        {
-          "id": "0317",
-          "userId": "2297",
-          "productId": "p015",
-          "name": "Yoga Mat Pro",
-          "price": 45,
-          "image": "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400",
-          "category": "Sports",
-          "quantity": 2
-        }
-      ],
-      "total": 150,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-13T04:00:22.770Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "e57b",
-      "userId": "2297",
-      "items": [
-        {
-          "id": "3a22",
-          "userId": "2297",
-          "productId": "p002",
-          "name": "Samsung Galaxy S24",
-          "price": 849,
-          "image": "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400",
-          "category": "Electronics",
-          "quantity": 1
-        },
-        {
-          "id": "7188",
-          "userId": "2297",
-          "productId": "p003",
-          "name": "Sony WH-1000XM5",
-          "price": 349,
-          "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
-          "category": "Electronics",
+          "stock": 15,
           "quantity": 1
         }
       ],
       "total": 1198,
       "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-13T04:55:23.719Z",
+      "date": "2026-03-19T06:55:45.209Z",
       "status": "Confirmed"
     },
     {
-      "id": "4869",
+      "id": "e7bd",
+      "userId": "47e1",
+      "items": [
+        {
+          "id": "7187",
+          "userId": "47e1",
+          "productId": "p002",
+          "name": "Samsung Galaxy S24",
+          "price": 849,
+          "image": "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400",
+          "category": "Electronics",
+          "stock": 8,
+          "quantity": 2
+        }
+      ],
+      "total": 1698,
+      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
+      "date": "2026-03-19T07:01:23.292Z",
+      "status": "Confirmed"
+    },
+    {
+      "id": "b21e",
+      "userId": "47e1",
+      "items": [
+        {
+          "id": "e416",
+          "userId": "47e1",
+          "productId": "p003",
+          "name": "Sony WH-1000XM5",
+          "price": 349,
+          "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
+          "category": "Electronics",
+          "stock": 15,
+          "quantity": 1
+        }
+      ],
+      "total": 349,
+      "address": "Kasthuri house, near nikshan godown,Moonunirath,Azhikode po, Kannur - 670009",
+      "date": "2026-03-19T07:06:35.962Z",
+      "status": "Confirmed"
+    },
+    {
+      "id": "590d",
+      "userId": "47e1",
+      "items": [
+        {
+          "id": "4a85",
+          "userId": "47e1",
+          "productId": "p002",
+          "name": "Samsung Galaxy S24",
+          "price": 849,
+          "image": "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400",
+          "category": "Electronics",
+          "stock": 8,
+          "quantity": 1
+        }
+      ],
+      "total": 849,
+      "address": "Kasthuri house, near nikshan godown,Moonunirath,Azhikode po, Kannur - 670009",
+      "date": "2026-03-19T07:09:51.749Z",
+      "status": "Confirmed"
+    },
+    {
+      "id": "6a03",
+      "userId": "47e1",
+      "items": [
+        {
+          "id": "7f7d",
+          "userId": "47e1",
+          "productId": "p008",
+          "name": "Men's Polo T-Shirt",
+          "price": 35,
+          "image": "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=400",
+          "category": "Clothing",
+          "stock": 40,
+          "quantity": 1
+        }
+      ],
+      "total": 35,
+      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
+      "date": "2026-03-19T07:12:19.756Z",
+      "status": "Confirmed"
+    },
+    {
+      "id": "9eb8",
+      "userId": "47e1",
+      "items": [
+        {
+          "id": "4876",
+          "userId": "47e1",
+          "productId": "p011",
+          "name": "Nike Air Max 270",
+          "price": 150,
+          "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",
+          "category": "Shoes",
+          "stock": 20,
+          "quantity": 1
+        }
+      ],
+      "total": 150,
+      "address": "Kasthuri house, near nikshan godown,Moonunirath,Azhikode po, Kannur - 670009",
+      "date": "2026-03-19T07:17:34.502Z",
+      "status": "Shipped"
+    },
+    {
+      "id": "a805",
+      "userId": "d3d7",
+      "items": [
+        {
+          "id": "f16d",
+          "userId": "d3d7",
+          "productId": "p011",
+          "name": "Nike Air Max 270",
+          "price": 150,
+          "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",
+          "category": "Shoes",
+          "stock": 20,
+          "quantity": 1
+        }
+      ],
+      "total": 150,
+      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
+      "date": "2026-03-24T06:40:30.052Z",
+      "status": "pending"
+    },
+    {
+      "id": "9d8c",
+      "userId": "4746",
+      "items": [
+        {
+          "id": "ecc7",
+          "userId": "4746",
+          "productId": "p001",
+          "name": "iPhone 15 Pro",
+          "price": "45000",
+          "category": "Electronics",
+          "stock": 10,
+          "quantity": 1
+        }
+      ],
+      "total": 45000,
+      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
+      "date": "2026-03-24T06:41:54.617Z",
+      "status": "pending"
+    },
+    {
+      "id": "2978",
+      "userId": "22b5",
+      "items": [
+        {
+          "id": "cc27",
+          "userId": "22b5",
+          "productId": "p020",
+          "name": "Atomic Habits",
+          "price": 18,
+          "image": "https://images.unsplash.com/photo-1535398089889-dd807df1dfaa?w=400",
+          "category": "Books",
+          "stock": 40,
+          "quantity": 1
+        }
+      ],
+      "total": 18,
+      "address": "Kasthuri house, near nikshan godown,Moonunirath,Azhikode po, Kannur - 670009",
+      "date": "2026-03-24T06:43:16.266Z",
+      "status": "Shipped"
+    },
+    {
+      "id": "0f55",
+      "userId": "a183",
+      "items": [
+        {
+          "id": "83d3",
+          "userId": "a183",
+          "productId": "p004",
+          "name": "MacBook Air M2",
+          "price": 1199,
+          "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400",
+          "category": "Electronics",
+          "stock": 5,
+          "quantity": 1
+        }
+      ],
+      "total": 1199,
+      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
+      "date": "2026-03-24T06:53:32.804Z",
+      "status": "Shipped"
+    },
+    {
+      "id": "f865",
       "userId": "2297",
       "items": [
         {
-          "id": "876c",
+          "id": "af62",
           "userId": "2297",
           "productId": "p003",
           "name": "Sony WH-1000XM5",
           "price": 349,
           "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
           "category": "Electronics",
+          "stock": 15,
           "quantity": 2
-        },
+        }
+      ],
+      "total": 698,
+      "address": "Kasthuri house, near nikshan godown,Moonunirath,Azhikode po, Kannur - 670009",
+      "date": "2026-03-24T09:47:59.093Z",
+      "status": "pending"
+    },
+    {
+      "id": "4cca",
+      "userId": "2297",
+      "items": [
         {
-          "id": "4799",
+          "id": "c677",
           "userId": "2297",
+          "productId": "p008",
+          "name": "Men's Polo T-Shirt",
+          "price": 35,
+          "image": "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=400",
+          "category": "Clothing",
+          "stock": 40,
+          "quantity": 1
+        }
+      ],
+      "total": 35,
+      "address": "Kasthuri house, near nikshan godown,Moonunirath,Azhikode po, Kannur - 670009",
+      "date": "2026-03-24T09:57:35.160Z",
+      "status": "delivered"
+    },
+    {
+      "id": "fc42",
+      "userId": "a183",
+      "items": [
+        {
+          "id": "189c",
+          "userId": "a183",
           "productId": "p004",
           "name": "MacBook Air M2",
           "price": 1199,
           "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400",
           "category": "Electronics",
-          "quantity": 1
-        },
-        {
-          "id": "7a6a",
-          "userId": "2297",
-          "productId": "p011",
-          "name": "Nike Air Max 270",
-          "price": 150,
-          "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",
-          "category": "Shoes",
+          "stock": 5,
           "quantity": 1
         }
       ],
-      "total": 2047,
+      "total": 1199,
       "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-13T05:04:46.768Z",
-      "status": "Confirmed"
+      "date": "2026-03-25T04:08:55.740Z",
+      "status": "pending"
     },
     {
-      "id": "8470",
-      "userId": "2297",
-      "items": [
-        {
-          "id": "2a4b",
-          "userId": "2297",
-          "productId": "p014",
-          "name": "Converse Chuck Taylor",
-          "price": 65,
-          "image": "https://images.unsplash.com/photo-1607522370275-f14206abe5d3?w=400",
-          "category": "Shoes",
-          "quantity": 2
-        }
-      ],
-      "total": 130,
-      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
-      "date": "2026-03-13T05:08:11.188Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "41ba",
+      "id": "4cc2",
       "userId": "a183",
       "items": [
         {
-          "id": "4c06",
+          "id": "118e",
           "userId": "a183",
           "productId": "p002",
           "name": "Samsung Galaxy S24",
           "price": 849,
           "image": "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400",
           "category": "Electronics",
-          "quantity": 3
+          "stock": 8,
+          "quantity": 1
         },
         {
-          "id": "6890",
+          "id": "7b39",
           "userId": "a183",
-          "productId": "p007",
-          "name": "Levi's 501 Jeans",
-          "price": 80,
-          "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400",
-          "category": "Clothing",
-          "quantity": 2
-        }
-      ],
-      "total": 2707,
-      "address": "Kasthuri house, near nikshan godown,Moonunirath,Azhikode po, Kannur - 670009",
-      "date": "2026-03-13T05:17:02.968Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "c4ea",
-      "userId": "a183",
-      "items": [
-        {
-          "id": "bcfb",
-          "userId": null,
-          "productId": "p002",
-          "name": "Samsung Galaxy S24",
-          "price": 849,
-          "image": "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400",
+          "productId": "p004",
+          "name": "MacBook Air M2",
+          "price": 1199,
+          "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400",
           "category": "Electronics",
-          "quantity": 2
-        }
-      ],
-      "total": 1698,
-      "address": "Kasthuri house, near nikshan godown,Moonunirath,Azhikode po, Kannur - 670009",
-      "date": "2026-03-13T10:11:46.714Z",
-      "status": "Confirmed"
-    },
-    {
-      "id": "879b",
-      "userId": "a183",
-      "items": [
-        {
-          "id": "8d79",
-          "userId": null,
-          "productId": "p002",
-          "name": "Samsung Galaxy S24",
-          "price": 849,
-          "image": "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400",
-          "category": "Electronics",
-          "quantity": 1
-        },
-        {
-          "id": "81e1",
-          "userId": null,
-          "productId": "p007",
-          "name": "Levi's 501 Jeans",
-          "price": 80,
-          "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400",
-          "category": "Clothing",
+          "stock": 5,
           "quantity": 1
         }
       ],
-      "total": 929,
-      "address": "Kasthuri house, near nikshan godown,Moonunirath,Azhikode po, Kannur - 670009",
-      "date": "2026-03-13T14:23:23.215Z",
-      "status": "Confirmed"
+      "total": 2048,
+      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
+      "date": "2026-03-25T04:57:55.861Z",
+      "status": "pending"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

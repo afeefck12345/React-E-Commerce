@@ -2,19 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { useWishlist } from "../context/WishlistContext";
 import { useToast } from "../context/ToastContext";
 
-const categoryColors = {
-  Electronics: "bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-300",
-  Clothing: "bg-pink-100 text-pink-700 dark:bg-pink-950 dark:text-pink-300",
-  Shoes: "bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300",
-  Sports: "bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300",
-  Books: "bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300",
-};
-
 export default function ProductCard({ product }) {
   const navigate = useNavigate();
   const { isWishlisted, addToWishlist, removeFromWishlist } = useWishlist();
   const { showToast } = useToast();
-  const badgeColor = categoryColors[product.category] || "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400";
   const wishlisted = isWishlisted(product.id);
 
   const handleWishlist = async (e) => {
@@ -31,23 +22,26 @@ export default function ProductCard({ product }) {
   return (
     <div
       onClick={() => navigate(`/product/${product.id}`)}
-      className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border border-gray-100 dark:border-gray-800 rounded-2xl overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition duration-300 group flex flex-col relative"
+      className="bg-white border border-sky-100 hover:border-sky-300 rounded-xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-100/60 group flex flex-col relative"
     >
 
-      {/* Heart Button */}
+      {/* Wishlist Button */}
       <button
         onClick={handleWishlist}
         className={`absolute top-3 right-3 z-10 w-8 h-8 flex items-center justify-center rounded-full border transition cursor-pointer ${
           wishlisted
-            ? "bg-pink-50 dark:bg-pink-950 border-pink-200 dark:border-pink-800"
-            : "bg-white/80 dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-pink-200 dark:hover:border-pink-800"
+            ? "bg-red-50 border-red-200"
+            : "bg-white/80 backdrop-blur-sm border-sky-200/60 hover:border-sky-300"
         }`}
       >
-        {wishlisted ? "❤️" : "🤍"}
+        <span style={{ fontSize: "14px" }}>{wishlisted ? "❤️" : "🤍"}</span>
       </button>
 
-      {/* Image */}
-      <div className="h-48 overflow-hidden bg-gray-50 dark:bg-gray-800">
+      {/* Product Image */}
+      <div
+        className="h-48 overflow-hidden"
+        style={{ background: "linear-gradient(135deg, rgba(14,165,233,0.06), rgba(16,185,129,0.08))" }}
+      >
         <img
           src={product.image}
           alt={product.name}
@@ -55,39 +49,49 @@ export default function ProductCard({ product }) {
         />
       </div>
 
-      {/* Body */}
       <div className="p-4 flex flex-col flex-1">
-        <span className={`text-xs font-medium px-2.5 py-1 rounded-lg w-fit ${badgeColor}`}>
+
+        {/* Category */}
+        <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-sky-500">
           {product.category}
         </span>
 
-        <h3 className="text-sm font-semibold text-gray-900 dark:text-white mt-2 leading-snug">
+        {/* Name */}
+        <h3 className="text-sm font-bold text-[#0c2340] mt-1.5 leading-snug">
           {product.name}
         </h3>
 
-        <p className="text-xs text-gray-400 dark:text-gray-500 mt-1 line-clamp-2 leading-relaxed flex-1">
+        {/* Description */}
+        <p className="text-xs text-sky-900/40 mt-1 line-clamp-2 leading-relaxed flex-1 font-light">
           {product.description}
         </p>
 
-        <div className="flex items-center justify-between mt-3">
-          <span className="text-base font-bold text-indigo-600 dark:text-indigo-400">
+        {/* Price + Stock */}
+        <div className="flex items-center justify-between gap-1 flex-wrap mt-3 pt-3 border-t border-sky-100/60">
+          <span
+            className="text-base font-extrabold bg-clip-text text-transparent"
+            style={{ backgroundImage: "linear-gradient(135deg, #0ea5e9, #10b981)" }}
+          >
             ${product.price.toLocaleString()}
           </span>
-          <span className={`text-xs font-medium px-2 py-0.5 rounded-md ${
+          <span className={`text-[9px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full text-centerl ${
             product.stock <= 5
-              ? "bg-red-50 text-red-500 dark:bg-red-950 dark:text-red-400"
-              : "bg-green-50 text-green-600 dark:bg-green-950 dark:text-green-400"
+              ? "bg-red-50 text-red-400"
+              : "bg-emerald-50 text-emerald-500"
           }`}>
             {product.stock <= 5 ? `Only ${product.stock} left` : `${product.stock} in stock`}
           </span>
         </div>
 
+        {/* View Details Button */}
         <button
           onClick={(e) => { e.stopPropagation(); navigate(`/product/${product.id}`); }}
-          className="mt-3 w-full py-2 rounded-xl border border-indigo-200 dark:border-indigo-900 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950 transition cursor-pointer"
+          className="mt-3 w-full py-2 text-[11px] font-semibold uppercase tracking-widest text-white rounded-lg transition-all hover:-translate-y-px cursor-pointer border-none"
+          style={{ background: "linear-gradient(135deg, #0ea5e9, #10b981)" }}
         >
           View Details →
         </button>
+
       </div>
     </div>
   );
