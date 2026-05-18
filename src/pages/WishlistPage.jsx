@@ -35,7 +35,7 @@ export default function WishlistPage() {
   <div className="min-h-screen bg-white px-4 py-8">
     <div className="max-w-5xl mx-auto">
 
-      {/* Page Header */}
+  
       <div className="mb-8">
         <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-sky-500 mb-1">
           Saved
@@ -48,7 +48,7 @@ export default function WishlistPage() {
         </p>
       </div>
 
-      {/* Loading */}
+  
       {loading && (
         <div className="flex flex-col items-center justify-center mt-24 gap-3">
           <div className="w-10 h-10 border-4 border-blue-200 border-t-blue-500 rounded-full animate-spin" />
@@ -58,7 +58,7 @@ export default function WishlistPage() {
         </div>
       )}
 
-      {/* Empty State */}
+   
       {!loading && wishlistItems.length === 0 && (
         <div className="flex flex-col items-center justify-center mt-24 gap-4">
           <div
@@ -87,7 +87,7 @@ export default function WishlistPage() {
         </div>
       )}
 
-      {/* Wishlist Grid */}
+      
       {!loading && wishlistItems.length > 0 && (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -96,7 +96,7 @@ export default function WishlistPage() {
                 key={item.id}
                 className="bg-white border border-sky-100 rounded-2xl overflow-hidden flex flex-col group hover:shadow-lg hover:shadow-sky-100/50 hover:border-sky-200 transition-all duration-200"
               >
-                {/* Image */}
+            
                 <div
                   onClick={() => navigate(`/product/${item.productId}`)}
                   className="h-48 overflow-hidden bg-sky-50 cursor-pointer"
@@ -108,7 +108,7 @@ export default function WishlistPage() {
                   />
                 </div>
 
-                {/* Details */}
+               
                 <div className="p-4 flex flex-col flex-1">
                   <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-sky-500">
                     {item.category}
@@ -123,7 +123,6 @@ export default function WishlistPage() {
                     ₹{item.price.toLocaleString("en-IN")}
                   </p>
 
-                  {/* Actions */}
                   <div className="flex gap-2 mt-auto pt-3">
                     <button
                       onClick={() => handleAddToCart(item)}
@@ -144,7 +143,7 @@ export default function WishlistPage() {
             ))}
           </div>
 
-          {/* Continue Shopping */}
+         
           <div className="text-center mt-8">
             <button
               onClick={() => navigate("/products")}

@@ -43,7 +43,7 @@ export default function AdminLogin() {
     <div className="min-h-screen flex items-center justify-center bg-white px-4">
       <div className="bg-white border border-sky-100 rounded-2xl p-8 w-full max-w-md shadow-lg shadow-sky-100/50">
 
-        {/* Header */}
+        
         <div className="mb-8">
           <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-sky-500 mb-1">
             Admin Panel
@@ -56,7 +56,7 @@ export default function AdminLogin() {
           </p>
         </div>
 
-        {/* Fields */}
+        
         <div className="flex flex-col gap-0">
 
           <div className="flex flex-col mb-6">
@@ -103,7 +103,7 @@ export default function AdminLogin() {
 
         </div>
 
-        {/* Back to user login */}
+      
         <p className="text-sm text-center mt-6 text-sky-900/40 font-light">
           Not an admin?{" "}
           <a

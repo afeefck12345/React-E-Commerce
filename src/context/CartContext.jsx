@@ -20,22 +20,21 @@ export const CartProvider = ({ children }) => {
   }, [user?.loginAt]); 
 
 
-const fetchCart = async () => {
-  setLoading(true);
-  try {
-    const res = await API.get(`/cart`); 
-    const userCart = res.data.filter(item => item.userId === user.id);
-    console.log(userCart)
-    setCartItems(userCart);
-  } catch (err) {
-    console.error("Failed to fetch cart", err);
-  } finally {
-    setLoading(false);
-  }
-};
+  const fetchCart = async () => {
+    setLoading(true);
+    try {
+      const res = await API.get(`/cart`);
+      setCartItems(Array.isArray(res.data) ? res.data : []);
+    } catch (err) {
+      console.error("Failed to fetch cart", err);
+      setCartItems([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const addToCart = async (product, quantity = 1) => {
-    if (!user || !user.id) return false; 
+    if (!user || !user.id) return false;
 
     const existing = cartItems.find((item) => item.productId === product.id);
     if (existing) {
@@ -45,23 +44,18 @@ const fetchCart = async () => {
         return "out_of_stock";
       }
       const updated = { ...existing, quantity: newQty };
-      await API.patch(`/cart/${existing.id}`, { quantity: updated.quantity });
-      setCartItems((prev) =>
-        prev.map((item) => (item.id === existing.id ? updated : item))
+      const res = await API.patch(`/cart/${existing.productId}`, {
+        quantity: updated.quantity,
+      });
+      const updatedItems = Array.isArray(res.data) ? res.data : null;
+      setCartItems(
+        updatedItems ||
+          cartItems.map((item) => (item.id === existing.id ? updated : item))
       );
     } else {
-      const newItem = {
-        userId: user.id, 
-        productId: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.image,
-        category: product.category,
-        stock: product.stock,
-        quantity,
-      };
+      const newItem = { productId: product.id, quantity };
       const res = await API.post("/cart", newItem);
-      setCartItems((prev) => [...prev, res.data]);
+      setCartItems(Array.isArray(res.data) ? res.data : cartItems);
     }
     return true;
   };
@@ -69,23 +63,28 @@ const fetchCart = async () => {
   const updateQuantity = async (cartItemId, newQuantity) => {
     if (newQuantity < 1) return;
     const item = cartItems.find((i) => i.id === cartItemId);
-    if (item && newQuantity > item.stock) return;
-    await API.patch(`/cart/${cartItemId}`, { quantity: newQuantity });
-    setCartItems((prev) =>
-      prev.map((i) =>
-        i.id === cartItemId ? { ...i, quantity: newQuantity } : i
-      )
+    if (!item || newQuantity > item.stock) return;
+
+    const res = await API.patch(`/cart/${item.productId}`, { quantity: newQuantity });
+    const updatedItems = Array.isArray(res.data) ? res.data : null;
+    setCartItems(
+      updatedItems ||
+        cartItems.map((i) =>
+          i.id === cartItemId ? { ...i, quantity: newQuantity } : i
+        )
     );
   };
 
   const removeFromCart = async (cartItemId) => {
-    await API.delete(`/cart/${cartItemId}`);
+    const item = cartItems.find((i) => i.id === cartItemId);
+    if (!item) return;
+    await API.delete(`/cart/${item.productId}`);
     setCartItems((prev) => prev.filter((item) => item.id !== cartItemId));
   };
 
   const clearCart = async () => {
     try {
-      await Promise.all(cartItems.map((item) => API.delete(`/cart/${item.id}`)));
+      await API.delete("/cart");
       setCartItems([]);
     } catch (err) {
       console.error("Failed to clear cart", err);

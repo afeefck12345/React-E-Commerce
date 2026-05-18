@@ -277,7 +277,7 @@ export default function AdminOrders() {
             </span>
           </div>
 
-          {/* Date & Address */}
+        
           <div className="mb-5 flex flex-col gap-1">
             <p className="text-xs text-sky-900/40">
               📅{" "}

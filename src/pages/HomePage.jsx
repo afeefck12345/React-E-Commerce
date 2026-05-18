@@ -1,7 +1,7 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../services/api";
+import { useAuth } from "../context/AuthContext";
 
 const categories = [
   { name: "Electronics", icon: "💻" },
@@ -11,27 +11,28 @@ const categories = [
   { name: "Books", icon: "📚" },
 ];
 
-const featuredIds = ["p001", "p004", "p011", "p020"];
 
 export default function HomePage() {
   const navigate = useNavigate();
+  const { user } = useAuth()
   const [products, setProducts] = useState([]);
+  const [featuredProducts, setFeaturedProducts] = useState([]);
 
+  // ✅ Single useEffect — removed the duplicate that was missing setFeaturedProducts
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await API.get("/products");
-        setProducts(res.data);
+        const res = await API.get("/products?limit=100");
+        const data = res.data;
+        const all = Array.isArray(data) ? data : data.products || [];
+        setProducts(all);
+        setFeaturedProducts(all.filter((p) => p.isFeatured));
       } catch (err) {
         console.error("Failed to fetch products", err);
       }
     };
     fetchProducts();
   }, []);
-
-  const featuredProducts = featuredIds
-    .map((id) => products.find((p) => p.id === id))
-    .filter(Boolean);
 
   const getCategoryCount = (cat) =>
     products.filter((p) => p.category === cat).length;
@@ -41,12 +42,11 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white font-sans">
 
-      {/* ── Hero ── */}
       <section
         className="relative px-4 md:px-12 pt-12 pb-10 overflow-hidden"
         style={{ background: "linear-gradient(135deg, #eefbff 0%, #e0f4ff 40%, #e8fff6 100%)" }}
       >
-        {/* Blobs */}
+        
         <div className="absolute top-[-60px] right-[160px] w-64 h-64 rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle, rgba(56,189,248,0.18) 0%, transparent 70%)" }} />
         <div className="absolute bottom-[-50px] right-[60px] w-52 h-52 rounded-full pointer-events-none"
@@ -56,7 +56,6 @@ export default function HomePage() {
 
         <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
 
-          {/* ── Left ── */}
           <div className="flex-1 min-w-0">
             <div className="inline-flex items-center gap-2 bg-sky-500/10 border border-sky-400/30 text-sky-700 text-[10px] font-semibold tracking-[0.18em] uppercase px-4 py-1.5 rounded-full mb-5">
               <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
@@ -78,33 +77,33 @@ export default function HomePage() {
               Explore premium products across electronics, fashion, sports & more — all in one place.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3">
-              <button
-                onClick={() => navigate("/products")}
-                className=" w-full sm:w-auto text-white px-8 py-3 text-[11px] font-semibold tracking-[0.1em] uppercase transition-all hover:-translate-y-px cursor-pointer border-none rounded-lg"
-                style={{ background: "linear-gradient(135deg, #0ea5e9, #10b981)" }}
-              >
-                Shop Now →
-              </button>
+           <div className="flex flex-col sm:flex-row gap-3">
+            <button
+              onClick={() => navigate("/products")}
+              className="w-full sm:w-auto text-white px-8 py-3 text-[11px] font-semibold tracking-[0.1em] uppercase transition-all hover:-translate-y-px cursor-pointer border-none rounded-lg"
+              style={{ background: "linear-gradient(135deg, #0ea5e9, #10b981)" }}
+            >
+              Shop Now →
+            </button>
+
+            {!user && (
               <button
                 onClick={() => navigate("/register")}
-                className=" w-full sm:w-auto bg-white/70 hover:bg-white text-sky-700 border border-sky-300/40 px-8 py-3 text-[11px] font-medium tracking-[0.1em] uppercase transition-all hover:-translate-y-px cursor-pointer rounded-lg"
+                className="w-full sm:w-auto bg-white/70 hover:bg-white text-sky-700 border border-sky-300/40 px-8 py-3 text-[11px] font-medium tracking-[0.1em] uppercase transition-all hover:-translate-y-px cursor-pointer rounded-lg"
               >
                 Create Account
               </button>
-            </div>
+            )}
+          </div>
           </div>
 
-          {/* ── Right — Marketing Image Cluster ── */}
           <div className="hidden md:block flex-shrink-0 relative w-72 h-64">
 
-            {/* Decorative spinning arc */}
             <div
               className="absolute top-1 right-1 w-24 h-24 rounded-full border-2 border-dashed border-sky-200/50 pointer-events-none z-10"
               style={{ animation: "hp-spin 14s linear infinite" }}
             />
 
-            {/* Dot grid */}
             <div
               className="absolute bottom-0 right-2 w-20 h-20 pointer-events-none z-10"
               style={{
@@ -113,41 +112,37 @@ export default function HomePage() {
               }}
             />
 
-            {/* Left image — rotated */}
-           {/* Left image — rotated */}
-      <div
-        className="absolute top-14 left-0 w-28 h-36 rounded-2xl overflow-hidden border-[3px] border-white/90 z-20"
-        style={{
-          boxShadow: "0 16px 48px rgba(12,35,64,0.12), 0 4px 12px rgba(0,0,0,0.07)",
-          background: "linear-gradient(145deg, #e8fff6, #dff4ff)",
-          transform: "rotate(-6deg)",
-          animation: "hp-float2 4s ease-in-out infinite",
-        }}
-      >
-        {heroImages[0]?.image ? (
-          <img src={heroImages[0].image} alt={heroImages[0].name} className="w-full h-full object-cover" />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center text-5xl">💻</div>
-        )}
-      </div>
+            <div
+              className="absolute top-14 left-0 w-28 h-36 rounded-2xl overflow-hidden border-[3px] border-white/90 z-20"
+              style={{
+                boxShadow: "0 16px 48px rgba(12,35,64,0.12), 0 4px 12px rgba(0,0,0,0.07)",
+                background: "linear-gradient(145deg, #e8fff6, #dff4ff)",
+                transform: "rotate(-6deg)",
+                animation: "hp-float2 4s ease-in-out infinite",
+              }}
+            >
+              {heroImages[0]?.image ? (
+                <img src={heroImages[0].image} alt={heroImages[0].name} className="w-full h-full object-cover" />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-5xl">💻</div>
+              )}
+            </div>
 
-      {/* Center image — biggest, front */}
-      <div
-        className="absolute top-8 left-16 w-36 h-44 rounded-2xl overflow-hidden border-[3px] border-white/90 z-30"
-        style={{
-          boxShadow: "0 20px 56px rgba(12,35,64,0.15), 0 4px 16px rgba(0,0,0,0.08)",
-          background: "linear-gradient(145deg, #dff4ff, #e8fff6)",
-          animation: "hp-float1 3.5s ease-in-out infinite",
-        }}
-      >
-        {heroImages[1]?.image ? (
-          <img src={heroImages[1].image} alt={heroImages[1].name} className="w-full h-full object-cover" />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center text-6xl">👟</div>
-        )}
-      </div>
+            <div
+              className="absolute top-8 left-16 w-36 h-44 rounded-2xl overflow-hidden border-[3px] border-white/90 z-30"
+              style={{
+                boxShadow: "0 20px 56px rgba(12,35,64,0.15), 0 4px 16px rgba(0,0,0,0.08)",
+                background: "linear-gradient(145deg, #dff4ff, #e8fff6)",
+                animation: "hp-float1 3.5s ease-in-out infinite",
+              }}
+            >
+              {heroImages[1]?.image ? (
+                <img src={heroImages[1].image} alt={heroImages[1].name} className="w-full h-full object-cover" />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-6xl">👟</div>
+              )}
+            </div>
 
-      {/* Right image — rotated other way */}
             <div
               className="absolute top-16 right-0 w-28 h-36 rounded-2xl overflow-hidden border-[3px] border-white/90 z-20"
               style={{
@@ -167,7 +162,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Keyframes */}
         <style>{`
           @keyframes hp-float1 {
             0%, 100% { transform: translateY(0px); }
@@ -188,7 +182,6 @@ export default function HomePage() {
         `}</style>
       </section>
 
-      {/* ── Stats Strip ── */}
       <div className="flex border-b border-sky-100">
         {[
           { n: "200+", l: "Products" },
@@ -213,10 +206,8 @@ export default function HomePage() {
         ))}
       </div>
 
-      {/* ── Body ── */}
       <div className="max-w-6xl mx-auto px-4 md:px-12 py-14">
 
-        {/* ── Shop by Category ── */}
         <section>
           <div className="flex justify-between items-end mb-5">
             <div>
@@ -250,13 +241,12 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Divider */}
         <div
           className="my-11 h-px"
           style={{ background: "linear-gradient(90deg, rgba(14,165,233,0.2), rgba(16,185,129,0.2), transparent)" }}
         />
 
-        {/* ── Featured Products ── */}
+        {/* ✅ FIXED Featured Products Section */}
         <section>
           <div className="flex justify-between items-end mb-5">
             <div>
@@ -271,61 +261,68 @@ export default function HomePage() {
             </button>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5">
-            {featuredProducts.map((product) => (
-              <div
-                key={product.id}
-                onClick={() => navigate(`/product/${product.id}`)}
-                className="bg-gradient-to-br from-sky-50/40 to-emerald-50/40 hover:from-sky-50/80 hover:to-emerald-50/80 border border-sky-200/20 hover:border-sky-300/50 rounded-xl overflow-hidden cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-100/60 group"
-              >
+          {/* ✅ Empty state: shown when no featured products exist */}
+          {featuredProducts.length === 0 ? (
+            <div className="text-center py-16 text-sky-300 text-sm font-light tracking-wide">
+              No featured products at the moment. Check back soon!
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5">
+              {featuredProducts.map((product) => (
                 <div
-                  className="h-36 border-b border-sky-100/50 overflow-hidden relative flex items-center justify-center"
-                  style={{ background: "linear-gradient(135deg, rgba(14,165,233,0.06), rgba(16,185,129,0.08))" }}
+                  key={product._id}
+                  onClick={() => navigate(`/product/${product._id}`)}
+                  className="bg-gradient-to-br from-sky-50/40 to-emerald-50/40 hover:from-sky-50/80 hover:to-emerald-50/80 border border-sky-200/20 hover:border-sky-300/50 rounded-xl overflow-hidden cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-100/60 group"
                 >
-                  {product.image ? (
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  ) : (
-                    <span className="text-4xl">🛍️</span>
-                  )}
-                  <span
-                    className="absolute top-2.5 left-2.5 text-white text-[8px] font-bold tracking-[0.12em] uppercase px-2 py-1 rounded"
-                    style={{ background: "linear-gradient(135deg, #0ea5e9, #10b981)" }}
+                  <div
+                    className="h-36 border-b border-sky-100/50 overflow-hidden relative flex items-center justify-center"
+                    style={{ background: "linear-gradient(135deg, rgba(14,165,233,0.06), rgba(16,185,129,0.08))" }}
                   >
-                    Featured
-                  </span>
-                </div>
-
-                <div className="p-4">
-                  <p className="text-[9px] font-semibold tracking-[0.18em] uppercase text-sky-500">
-                    {product.category}
-                  </p>
-                  <p className="text-[13px] font-semibold text-[#0c2340] mt-1.5 mb-2.5 leading-snug">
-                    {product.name}
-                  </p>
-                  <div className="flex justify-between items-center pt-2.5 border-t border-sky-100/50">
+                    {product.image ? (
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    ) : (
+                      <span className="text-4xl">🛍️</span>
+                    )}
                     <span
-                      className="text-[17px] font-extrabold bg-clip-text text-transparent"
-                      style={{ backgroundImage: "linear-gradient(135deg, #0ea5e9, #10b981)" }}
+                      className="absolute top-2.5 left-2.5 text-white text-[8px] font-bold tracking-[0.12em] uppercase px-2 py-1 rounded"
+                      style={{ background: "linear-gradient(135deg, #0ea5e9, #10b981)" }}
                     >
-                      ₹{product.price.toLocaleString()}
-                    </span>
-                    <span className="text-[10px] text-sky-300 font-light">
-                      {product.stock} left
+                      Featured
                     </span>
                   </div>
+
+                  <div className="p-4">
+                    <p className="text-[9px] font-semibold tracking-[0.18em] uppercase text-sky-500">
+                      {product.category}
+                    </p>
+                    <p className="text-[13px] font-semibold text-[#0c2340] mt-1.5 mb-2.5 leading-snug">
+                      {product.name}
+                    </p>
+                    <div className="flex justify-between items-center pt-2.5 border-t border-sky-100/50">
+                      <span
+                        className="text-[17px] font-extrabold bg-clip-text text-transparent"
+                        style={{ backgroundImage: "linear-gradient(135deg, #0ea5e9, #10b981)" }}
+                      >
+                        {/* ✅ Fixed: guard against undefined price */}
+                        ₹{product.price != null ? product.price.toLocaleString() : "—"}
+                      </span>
+                      <span className="text-[10px] text-sky-300 font-light">
+                        {product.stock} left
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </section>
 
       </div>
 
-      {/* ── CTA Strip ── */}
       <div
         className="relative px-4 md:px-12 py-10 flex items-center justify-between flex-wrap gap-5 overflow-hidden"
         style={{ background: "linear-gradient(135deg, #eefbff 0%, #e0f4ff 50%, #e8fff6 100%)" }}

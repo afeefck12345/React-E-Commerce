@@ -13,7 +13,7 @@ export default function OrderSuccessPage() {
     <div className="min-h-screen bg-white flex flex-col items-center justify-center p-6">
       <div className="bg-white border border-sky-100 rounded-2xl p-8 flex flex-col items-center gap-5 max-w-lg w-full text-center shadow-lg shadow-sky-100/50">
 
-        {/* Success Icon */}
+   
         <div
           className="w-20 h-20 rounded-full flex items-center justify-center text-4xl"
           style={{
@@ -23,7 +23,6 @@ export default function OrderSuccessPage() {
           ✅
         </div>
 
-        {/* Heading */}
         <div>
           <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-sky-500 mb-1">
             Success
@@ -41,7 +40,7 @@ export default function OrderSuccessPage() {
           )}
         </div>
 
-        {/* Product Details */}
+
         {items.length > 0 && (
           <div className="w-full text-left">
             <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-sky-900/40 mb-2">
@@ -53,7 +52,7 @@ export default function OrderSuccessPage() {
                   key={idx}
                   className="flex items-center gap-3 bg-sky-50 border border-sky-100 rounded-xl px-3 py-2.5"
                 >
-                  {/* Product image or placeholder */}
+ 
                   {item.image || item.imageUrl ? (
                     <img
                       src={item.image || item.imageUrl}
@@ -66,7 +65,7 @@ export default function OrderSuccessPage() {
                     </div>
                   )}
 
-                  {/* Name & qty */}
+
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-[#0c2340] truncate">
                       {item.name}
@@ -76,7 +75,7 @@ export default function OrderSuccessPage() {
                     </p>
                   </div>
 
-                  {/* Price */}
+     
                   <span className="text-sm font-bold text-[#0c2340] flex-shrink-0">
                     ₹{(item.price * item.quantity).toLocaleString("en-IN")}
                   </span>
@@ -86,7 +85,7 @@ export default function OrderSuccessPage() {
           </div>
         )}
 
-        {/* Amount Paid */}
+     
         <div className="w-full bg-sky-50 border border-sky-100 rounded-xl px-4 py-3 text-left">
           <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-sky-900/40 mb-0.5">
             Amount Paid
@@ -96,7 +95,7 @@ export default function OrderSuccessPage() {
           </p>
         </div>
 
-        {/* Delivery Address */}
+ 
         {address && (
           <div className="w-full text-left">
             <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-sky-900/40 mb-2">
@@ -131,7 +130,7 @@ export default function OrderSuccessPage() {
           </div>
         )}
 
-        {/* Action Buttons */}
+
         <div className="flex gap-3 w-full">
           <button
             onClick={() => navigate("/orders")}

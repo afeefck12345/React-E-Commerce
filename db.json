@@ -66,7 +66,7 @@
       "name": "jaison",
       "email": "jaison7@gmail.com",
       "password": "Jaison7",
-      "role": "user",
+      "role": "admin",
       "loginAt": 1774341547955,
       "address": {
         "street": "Elite mens hostel,near malabar hospital,manjeri",
@@ -367,6 +367,16 @@
       "stock": "10",
       "description": "",
       "active": false
+    },
+    {
+      "name": "Nokia",
+      "category": "Electronics",
+      "price": "5000",
+      "stock": "8",
+      "description": "",
+      "image": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400",
+      "id": "fba1",
+      "active": false
     }
   ],
   "cart": [
@@ -382,14 +392,25 @@
       "quantity": 2
     },
     {
-      "id": "b38d",
-      "userId": "a183",
+      "id": "75f9",
+      "userId": "1",
       "productId": "p003",
       "name": "Sony WH-1000XM5",
       "price": 349,
       "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
       "category": "Electronics",
       "stock": 15,
+      "quantity": 3
+    },
+    {
+      "id": "b0f1",
+      "userId": "1",
+      "productId": "p002",
+      "name": "Samsung Galaxy S24",
+      "price": 849,
+      "image": "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400",
+      "category": "Electronics",
+      "stock": 8,
       "quantity": 1
     }
   ],
@@ -414,7 +435,7 @@
       "total": 349,
       "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
       "date": "2026-03-17T10:54:24.188Z",
-      "status": "Confirmed"
+      "status": "processing"
     },
     {
       "id": "d467",
@@ -729,6 +750,80 @@
       "total": 2048,
       "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
       "date": "2026-03-25T04:57:55.861Z",
+      "status": "pending"
+    },
+    {
+      "id": "4995",
+      "userId": "a183",
+      "items": [
+        {
+          "id": "b38d",
+          "userId": "a183",
+          "productId": "p003",
+          "name": "Sony WH-1000XM5",
+          "price": 349,
+          "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
+          "category": "Electronics",
+          "stock": 15,
+          "quantity": 2
+        },
+        {
+          "id": "99c8",
+          "userId": "a183",
+          "productId": "p015",
+          "name": "Yoga Mat Pro",
+          "price": 45,
+          "image": "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400",
+          "category": "Sports",
+          "stock": 30,
+          "quantity": 1
+        }
+      ],
+      "total": 743,
+      "address": "Elite mens hostel,near malabar hospital,manjeri, Manjeri - 676121",
+      "date": "2026-03-25T16:26:20.956Z",
+      "status": "pending"
+    },
+    {
+      "id": "07fd",
+      "userId": "2297",
+      "items": [
+        {
+          "id": "4fba",
+          "userId": "2297",
+          "productId": "p003",
+          "name": "Sony WH-1000XM5",
+          "price": 349,
+          "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400",
+          "category": "Electronics",
+          "stock": 15,
+          "quantity": 1
+        }
+      ],
+      "total": 349,
+      "address": "Kasthuri house, near nikshan godown,Moonunirath,Azhikode po, Kannur - 670009",
+      "date": "2026-03-28T14:00:19.562Z",
+      "status": "pending"
+    },
+    {
+      "id": "4599",
+      "userId": "2297",
+      "items": [
+        {
+          "id": "02ee",
+          "userId": "2297",
+          "productId": "p001",
+          "name": "iPhone 15 Pro",
+          "price": "45000",
+          "image": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400",
+          "category": "Electronics",
+          "stock": 10,
+          "quantity": 2
+        }
+      ],
+      "total": 90000,
+      "address": "Kasthuri house, near nikshan godown,Moonunirath,Azhikode po, Kannur - 670009",
+      "date": "2026-04-20T04:24:02.051Z",
       "status": "pending"
     }
   ],

@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           
-          {/* Brand */}
+    
           <div>
             <div className="flex items-center gap-2 mb-3">
               <span
@@ -41,7 +41,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* About */}
+          
           <div>
             <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#0c2340] mb-3">
               About Us
@@ -60,7 +60,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
+       
           <div>
             <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#0c2340] mb-3">
               Contact
@@ -86,7 +86,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Policies + Social */}
+          
           <div>
             <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#0c2340] mb-3">
               Policies
@@ -108,7 +108,7 @@ export default function Footer() {
               ))}
             </ul>
 
-            {/* Social icons */}
+            
             <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#0c2340] mb-3">
               Follow Us
             </h4>

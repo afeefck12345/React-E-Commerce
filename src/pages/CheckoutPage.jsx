@@ -12,9 +12,9 @@ export default function CheckoutPage() {
   const [step, setStep] = useState("form");
   const [form, setForm] = useState({
     name: user?.name || "",
-    address: user?.address.street||"",
-    city: user?.address.city||"",
-    pincode: user?.address.pincode||"",
+    address: user?.address?.street || "",
+    city: user?.address?.city || "",
+    pincode: user?.address?.pincode || "",
     cardNumber:"",
     expiry: "",
     cvv: "",
@@ -57,18 +57,23 @@ export default function CheckoutPage() {
   await new Promise((res) => setTimeout(res, 2500));
 
   const order = {
-    userId: user.id,
     items: cartItems,
     total: totalPrice,
-    address: `${form.address}, ${form.city} - ${form.pincode}`,
-    date: new Date().toISOString(),
+    shippingAddress: {
+      street: form.address,
+      city: form.city,
+      state: user?.address?.state || "Kerala",
+      pincode: form.pincode,
+      country: "India",
+    },
     status: "pending",
+    paymentMethod: "cod",
   };
 
   const res = await API.post("/orders", order);
 
   const captured = totalPrice;
-  const capturedItems = [...cartItems]; // snapshot before clearCart wipes it
+  const capturedItems = [...cartItems];
   await clearCart();
 
   navigate("/order-success", {
@@ -110,7 +115,7 @@ return (
   <div className="min-h-screen bg-white px-4 py-8">
     <div className="max-w-5xl mx-auto">
 
-      {/* Page Header */}
+      
       <div className="mb-8">
         <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-sky-500 mb-1">
           Final Step
@@ -125,10 +130,10 @@ return (
 
       <div className="flex flex-col lg:flex-row gap-5">
 
-        {/* Left: Forms */}
+        
         <div className="flex-1 flex flex-col gap-4">
 
-          {/* Delivery Details */}
+        
           <div className="bg-white border border-sky-100 rounded-2xl overflow-hidden shadow-sm shadow-sky-100/40">
             <div
               className="px-6 py-4 border-b border-sky-100"
@@ -151,7 +156,7 @@ return (
             </div>
           </div>
 
-          {/* Payment Details */}
+          
           <div className="bg-white border border-sky-100 rounded-2xl overflow-hidden shadow-sm shadow-sky-100/40">
             <div
               className="px-6 py-4 border-b border-sky-100"
@@ -175,11 +180,11 @@ return (
 
         </div>
 
-        {/* Right: Order Summary */}
+        
         <div className="w-full lg:w-80 shrink-0">
           <div className="bg-white border border-sky-100 rounded-2xl sticky top-6 overflow-hidden shadow-xl shadow-sky-100/40">
 
-            {/* Header */}
+           
             <div
               className="px-5 py-4 border-b border-sky-100"
               style={{ background: "linear-gradient(135deg, #eefbff, #e8fff6)" }}
@@ -192,7 +197,7 @@ return (
               </h2>
             </div>
 
-            {/* Items */}
+          
             <div className="px-5 py-4 flex flex-col gap-3 max-h-52 overflow-y-auto">
               {cartItems.map((item) => (
                 <div key={item.id} className="flex justify-between text-sm text-sky-900/45">
@@ -206,7 +211,6 @@ return (
               ))}
             </div>
 
-            {/* Totals + Actions */}
             <div
               className="px-5 py-4 border-t border-sky-100 flex flex-col gap-3"
               style={{ background: "linear-gradient(135deg, rgba(14,165,233,0.03), rgba(16,185,129,0.03))" }}

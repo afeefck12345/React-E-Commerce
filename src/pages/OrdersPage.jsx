@@ -73,7 +73,6 @@ export default function OrdersPage() {
     if (newId) fetchProductImages(order.items);
   };
 
-  // ✅ Loading
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
@@ -85,7 +84,7 @@ export default function OrdersPage() {
     );
   }
 
-  // ✅ Empty state
+
   if (orders.length === 0) {
     return (
       <div className="min-h-screen bg-white flex flex-col items-center justify-center gap-4">
@@ -116,12 +115,12 @@ export default function OrdersPage() {
     );
   }
 
-  // ✅ Orders list
+ 
   return (
     <div className="min-h-screen bg-white px-4 py-8">
       <div className="max-w-3xl mx-auto">
 
-        {/* Header */}
+    
         <div className="mb-8">
           <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-sky-500 mb-1">
             History
@@ -158,7 +157,7 @@ export default function OrdersPage() {
                 key={order.id}
                 className="bg-white border border-sky-100 rounded-2xl overflow-hidden transition-all duration-200 hover:shadow-lg hover:shadow-sky-100/50"
               >
-                {/* Header Row */}
+                
                 <div
                   className="flex flex-col sm:flex-row sm:items-center justify-between px-4 py-4 gap-2 cursor-pointer hover:bg-sky-50/50 transition"
                   onClick={() => handleExpand(order)}
@@ -173,7 +172,7 @@ export default function OrdersPage() {
                   </div>
 
                   <div className="flex items-center gap-3 self-start sm:self-auto">
-                    {/* Status Badge */}
+                    
                     <span
                       className={`text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full border ${statusCfg.color}`}
                     >
@@ -185,11 +184,10 @@ export default function OrdersPage() {
                   </div>
                 </div>
 
-                {/* Expanded */}
+              
                 {isExpanded && (
                   <div className="border-t px-3 sm:px-5 py-4 flex flex-col gap-4">
 
-                    {/* Status Stepper */}
                     {!isCancelled ? (
                       <div className="flex items-center gap-0 mb-1">
                         {STATUS_STEPS.map((step, idx) => {
@@ -204,7 +202,7 @@ export default function OrdersPage() {
                           return (
                             <div key={step} className="flex items-center flex-1">
                               <div className="flex flex-col items-center flex-1">
-                                {/* Circle */}
+                                
                                 <div
                                   className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border-2 transition-all ${
                                     isCompleted
@@ -213,7 +211,7 @@ export default function OrdersPage() {
                                   }`}
                                 >
                                   {isCompleted ? (
-                                    // checkmark
+                                 
                                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                                     </svg>
@@ -221,7 +219,7 @@ export default function OrdersPage() {
                                     idx + 1
                                   )}
                                 </div>
-                                {/* Label */}
+                                
                                 <span
                                   className={`text-[9px] mt-1 font-medium hidden xs:block sm:block ${isCompleted ? "text-sky-500" : "text-sky-200"}`}
                                 >
@@ -229,7 +227,7 @@ export default function OrdersPage() {
                                 </span>
                               </div>
 
-                              {/* Connector line */}
+                             
                               {!isLast && (
                                 <div
                                   className={`h-0.5 flex-1 mb-4 transition-all ${
@@ -242,7 +240,7 @@ export default function OrdersPage() {
                         })}
                       </div>
                     ) : (
-                      // Cancelled notice
+                     
                       <div className="flex items-center gap-2 bg-red-50 border border-red-100 rounded-xl px-4 py-3">
                         <svg className="w-4 h-4 text-red-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -253,7 +251,7 @@ export default function OrdersPage() {
                       </div>
                     )}
 
-                    {/* Items */}
+             
                     <div className="flex flex-col gap-3">
                       {order.items.map((item, idx) => {
                         const imageUrl =
@@ -264,7 +262,7 @@ export default function OrdersPage() {
 
                         return (
                           <div key={idx} className="flex items-center gap-3">
-                            {/* Product image */}
+                           
                             {imageUrl ? (
                               <img
                                 src={imageUrl}
@@ -277,12 +275,12 @@ export default function OrdersPage() {
                               </div>
                             )}
 
-                            {/* Name & qty */}
+                            
                             <span className="flex-1 text-sm">
                               {item.name} × {item.quantity}
                             </span>
 
-                            {/* Price */}
+                           
                             <span className="text-sm font-medium">
                               ₹{item.price * item.quantity}
                             </span>
@@ -291,7 +289,7 @@ export default function OrdersPage() {
                       })}
                     </div>
 
-                    {/* Order Total */}
+                    
                     <div className="flex justify-between items-center border-t pt-3 mt-1">
                       <span className="text-xs text-sky-900/40 font-medium uppercase tracking-wider">
                         Order Total

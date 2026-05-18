@@ -34,7 +34,7 @@ export default function Navbar() {
     <nav className="bg-white/80 backdrop-blur-md border-b border-sky-100 px-4 py-0 shadow-sm shadow-sky-100/50 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center h-14">
 
-        {/* Logo */}
+     
         <Link to="/" className="flex items-center gap-2 text-lg font-extrabold tracking-tight text-[#0c2340]">
           <span
             className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm"
@@ -51,7 +51,7 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Desktop Nav */}
+       
         <div className="hidden md:flex items-stretch gap-1 h-14">
           <NavLink to="/products">Products</NavLink>
 
@@ -60,7 +60,7 @@ export default function Navbar() {
               {user.role === "admin" && <NavLink to="/admin">Admin</NavLink>}
               <NavLink to="/orders">Orders</NavLink>
 
-              {/* Wishlist */}
+              
               <Link
                 to="/wishlist"
                 className="relative flex items-center gap-1.5 px-3 text-[11px] font-semibold uppercase tracking-widest text-sky-900/50 hover:text-sky-600 transition border-b-2 border-transparent hover:border-sky-400"
@@ -76,7 +76,7 @@ export default function Navbar() {
                 )}
               </Link>
 
-              {/* Cart */}
+              
               <Link
                 to="/cart"
                 className="relative flex items-center gap-1.5 px-3 text-[11px] font-semibold uppercase tracking-widest text-sky-900/50 hover:text-sky-600 transition border-b-2 border-transparent hover:border-sky-400"
@@ -96,16 +96,16 @@ export default function Navbar() {
 
           <div className="w-px bg-sky-100 mx-1 self-center h-5" />
 
-          {/* Theme toggle */}
-          <button
+         
+          {/* <button
             onClick={toggleTheme}
             title="Toggle Theme"
             className="flex items-center justify-center px-3 text-sm text-sky-900/40 hover:text-sky-500 transition border-b-2 border-transparent hover:border-sky-400"
           >
             {theme === "light" ? "🌙" : "☀️"}
-          </button>
+          </button> */}
 
-          {/* User dropdown */}
+         
           {user ? (
             <div className="relative flex items-center" ref={dropdownRef}>
               <button
@@ -174,7 +174,7 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Mobile Right: icons + hamburger */}
+        
         <div className="flex md:hidden items-center gap-3">
           {user && (
             <>
@@ -203,7 +203,7 @@ export default function Navbar() {
             </>
           )}
 
-          {/* Hamburger */}
+        
           <button
             onClick={() => setMenuOpen((p) => !p)}
             className="text-sky-900/50 hover:text-sky-600 transition p-1"
@@ -218,7 +218,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      
       {menuOpen && (
         <div className="md:hidden border-t border-sky-100 bg-white/95 backdrop-blur-md pb-4">
           <div className="flex flex-col px-4 pt-3 gap-1">

@@ -48,7 +48,7 @@ return (
   <div className="min-h-screen flex items-center justify-center bg-white px-4">
     <div className="bg-white border border-sky-100 rounded-2xl p-8 w-full max-w-md shadow-lg shadow-sky-100/50">
 
-      {/* Header */}
+   
       <div className="mb-8">
         <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-sky-500 mb-1">
           Get Started
@@ -61,7 +61,7 @@ return (
         </p>
       </div>
 
-      {/* Fields */}
+ 
       <div className="flex flex-col gap-0">
 
         <div className="flex flex-col mb-6">

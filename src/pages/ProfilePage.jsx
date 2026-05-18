@@ -80,9 +80,10 @@ export default function ProfilePage() {
           country: form.country,
         },
       };
-      await API.patch(`/users/${user.id}`, updatedUser);
-      setUser(updatedUser)
-      localStorage.setItem("user", JSON.stringify(updatedUser));
+      const res = await API.patch("/users/profile", updatedUser);
+      const savedUser = { ...res.data.user, loginAt: user.loginAt };
+      setUser(savedUser)
+      localStorage.setItem("user", JSON.stringify(savedUser));
       setSuccess("Profile updated successfully!");
       setIsEditing(false);
       setForm({ ...form, password: "" });
@@ -109,11 +110,11 @@ export default function ProfilePage() {
 
       <div className="flex flex-col lg:flex-row gap-5">
 
-        {/* Sidebar */}
+     
         <div className="lg:w-56 shrink-0">
           <div className="bg-white border border-sky-100 rounded-2xl overflow-hidden shadow-sm shadow-sky-100/40">
 
-            {/* Avatar */}
+          
             <div
               className="px-4 py-5 flex flex-col items-center gap-2 border-b border-sky-100"
               style={{ background: "linear-gradient(135deg, #eefbff, #e8fff6)" }}
@@ -139,7 +140,7 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            {/* Nav */}
+      
             <div className="py-2">
               {sections.map((section) => (
                 <button
@@ -162,13 +163,12 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {/* Main Content */}
         <div className="flex-1">
           <div className="bg-white border border-sky-100 rounded-2xl overflow-hidden shadow-sm shadow-sky-100/40">
 
             {active === "profile" && (
               <div>
-                {/* Section Header */}
+         
                 <div
                   className="px-6 py-4 border-b border-sky-100 flex items-center justify-between"
                   style={{ background: "linear-gradient(135deg, #eefbff, #e8fff6)" }}
@@ -203,7 +203,7 @@ export default function ProfilePage() {
                     </div>
                   )}
 
-                  {/* View Mode */}
+
                   {!isEditing ? (
                     <div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-1 mb-6">
@@ -247,7 +247,7 @@ export default function ProfilePage() {
                     </div>
 
                   ) : (
-                    /* Edit Mode */
+                 
                     <div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
                         <MyntraField

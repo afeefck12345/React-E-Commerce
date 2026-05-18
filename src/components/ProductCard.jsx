@@ -25,7 +25,7 @@ export default function ProductCard({ product }) {
       className="bg-white border border-sky-100 hover:border-sky-300 rounded-xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-100/60 group flex flex-col relative"
     >
 
-      {/* Wishlist Button */}
+     
       <button
         onClick={handleWishlist}
         className={`absolute top-3 right-3 z-10 w-8 h-8 flex items-center justify-center rounded-full border transition cursor-pointer ${
@@ -37,7 +37,7 @@ export default function ProductCard({ product }) {
         <span style={{ fontSize: "14px" }}>{wishlisted ? "❤️" : "🤍"}</span>
       </button>
 
-      {/* Product Image */}
+     
       <div
         className="h-48 overflow-hidden"
         style={{ background: "linear-gradient(135deg, rgba(14,165,233,0.06), rgba(16,185,129,0.08))" }}
@@ -51,22 +51,22 @@ export default function ProductCard({ product }) {
 
       <div className="p-4 flex flex-col flex-1">
 
-        {/* Category */}
+       
         <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-sky-500">
           {product.category}
         </span>
 
-        {/* Name */}
+       
         <h3 className="text-sm font-bold text-[#0c2340] mt-1.5 leading-snug">
           {product.name}
         </h3>
 
-        {/* Description */}
+       
         <p className="text-xs text-sky-900/40 mt-1 line-clamp-2 leading-relaxed flex-1 font-light">
           {product.description}
         </p>
 
-        {/* Price + Stock */}
+   
         <div className="flex items-center justify-between gap-1 flex-wrap mt-3 pt-3 border-t border-sky-100/60">
           <span
             className="text-base font-extrabold bg-clip-text text-transparent"
@@ -83,7 +83,7 @@ export default function ProductCard({ product }) {
           </span>
         </div>
 
-        {/* View Details Button */}
+   
         <button
           onClick={(e) => { e.stopPropagation(); navigate(`/product/${product.id}`); }}
           className="mt-3 w-full py-2 text-[11px] font-semibold uppercase tracking-widest text-white rounded-lg transition-all hover:-translate-y-px cursor-pointer border-none"
