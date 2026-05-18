@@ -19,11 +19,11 @@ import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import Footer from "./components/Footer";
 import AdminProtectedRoute from "./routes/AdminProtectedRoute";
-import AdminLogin from "./pages/admin/AdminLogin";
+import AdminLogin from "./pages/Admin/AdminLogin";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AdminProducts from "./pages/Admin/AdminProducts";
 import AdminUsers from "./pages/Admin/AdminUsers";
-import AdminOrders from "./pages/admin/AdminOrders";
+import AdminOrders from "./pages/Admin/AdminOrders";
 
 
 // ✅ Layout stays inside BrowserRouter so useLocation() works correctly
