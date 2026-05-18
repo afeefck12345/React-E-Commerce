@@ -3,13 +3,16 @@ import app from "./app.js";
 import connectDB from "./config/db.js";
 import cors from "cors"
 
-
 app.use(cors({
-  origin: 'https://your-app.vercel.app', // update after deploying frontend
+  origin: [
+    "http://localhost:5173",
+    "https://react-e-commerce-omega-three.vercel.app",
+    "https://react-e-commerce-git-main-afeef-ck-s-projects.vercel.app"
+  ],
   credentials: true
 }));
-const PORT = process.env.PORT || 5000;
 
+const PORT = process.env.PORT || 5000;
 
 connectDB().then(() => {
   app.listen(PORT, () => {
