@@ -2,7 +2,6 @@ import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
 
-// Only load .env file in development, not in production
 if (process.env.NODE_ENV !== "production") {
   const envCandidates = [
     path.resolve(process.cwd(), "server/.env"),
