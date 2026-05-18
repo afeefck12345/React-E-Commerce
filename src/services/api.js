@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
+  baseURL: "https://shophub-backend-xwam.onrender.com/api",
 })
 
 const firstImage = (value) => {
@@ -111,7 +111,7 @@ API.interceptors.response.use(
         if (!refreshToken) throw new Error("No refresh token");
 
         const res = await axios.post(
-          `${import.meta.env.VITE_API_URL || "http://localhost:5000/api"}/auth/refresh-token`,
+          `https://shophub-backend-xwam.onrender.com/api/auth/refresh-token`,
           { refreshToken }
         );
 
